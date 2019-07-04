@@ -1,6 +1,5 @@
 package com.felix.madeclass;
 
-import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

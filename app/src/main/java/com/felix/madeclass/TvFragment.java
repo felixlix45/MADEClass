@@ -11,9 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.felix.madeclass.adapter.MovieAdapter;
 import com.felix.madeclass.adapter.TvAdapter;
-import com.felix.madeclass.model.Movie;
 import com.felix.madeclass.model.TvShow;
 
 import java.util.ArrayList;

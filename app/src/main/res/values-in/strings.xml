@@ -9,6 +9,9 @@
     <string name="title_movies">Film</string>
     <string name="title_tv_show">Acara TV</string>
     <string name="change_language_settings">Ganti Bahasa</string>
+    <string name="tv_rating">Rating TV</string>
+    <string name="tv_release_date">Tanggal Rilis</string>
+    <string name="heart_icon">Ikon Hati</string>
 
     <string-array name="movieTitle">
         <item>A Star Is Born</item>
