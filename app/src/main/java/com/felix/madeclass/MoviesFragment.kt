@@ -59,7 +59,6 @@ class MoviesFragment : Fragment() {
     private fun showRecyclerView() {
         val linearLayout: LinearLayoutManager = LinearLayoutManager(requireActivity())
         rvMovie!!.layoutManager = linearLayout
-//        rvMovie!!.layoutManager = LinearLayoutManager(requireActivity())
         val movieAdapter = MovieAdapter(requireActivity(), movies)
 
         rvMovie!!.adapter = movieAdapter
@@ -69,11 +68,11 @@ class MoviesFragment : Fragment() {
 
     private fun addItem() {
         movies = ArrayList()
-
+        var url = resources.getString(R.string.url_movie, API_KEY)
         AndroidNetworking.initialize(requireActivity())
         shimmerFrameLayout.startShimmer()
         shimmerFrameLayout.visibility = View.VISIBLE
-        AndroidNetworking.get("https://api.themoviedb.org/3/discover/movie?api_key="+ API_KEY+"&language=en-US")
+        AndroidNetworking.get(url)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(object : JSONObjectRequestListener{

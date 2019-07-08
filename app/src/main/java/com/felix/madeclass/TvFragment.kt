@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import com.felix.madeclass.adapter.TvAdapter
 import com.felix.madeclass.model.TvShow
@@ -15,6 +16,7 @@ import com.felix.madeclass.model.TvShow
 import java.util.ArrayList
 
 class TvFragment : Fragment() {
+
 
     private var tvTitle: Array<String>? = null
     private var tvRating: Array<String>? = null
@@ -31,6 +33,9 @@ class TvFragment : Fragment() {
         addItem()
 
         showRecyclerView()
+
+        var text = resources.getString(R.string.app_name)
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 
         return v
     }

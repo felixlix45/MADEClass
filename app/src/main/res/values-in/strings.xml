@@ -12,6 +12,7 @@
     <string name="tv_rating">Rating TV</string>
     <string name="tv_release_date">Tanggal Rilis</string>
     <string name="heart_icon">Ikon Hati</string>
+    <string name="url_movie">https://api.themoviedb.org/3/discover/movie?api_key=%1$s&amp;language=id-IN</string>
 
     <string-array name="movieTitle">
         <item>A Star Is Born</item>
