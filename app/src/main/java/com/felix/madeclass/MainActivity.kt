@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
 
 import android.view.Menu
 import android.view.MenuItem
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
-        var selectedFragment: Fragment? = null
+        val selectedFragment: Fragment
 
         when (menuItem.itemId) {
             R.id.title_movies -> {
@@ -34,14 +33,6 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName).commit()
             }
         }
-
-//        val currFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-//
-//        if(selectedFragment!!.isHidden){
-//            supportFragmentManager.beginTransaction().show(selectedFragment).commit()
-//        }else{
-//            supportFragmentManager.beginTransaction().add(R.id.fragment_container, selectedFragment).hide(currFragment!!).commit()
-//        }
         true
     }
 
@@ -54,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         this.doubleBackToExitPressedOnce = true
         Toast.makeText(this, "Press back again to leave", Toast.LENGTH_SHORT).show()
 
-        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+        Handler().postDelayed( { doubleBackToExitPressedOnce = false }, 2000)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

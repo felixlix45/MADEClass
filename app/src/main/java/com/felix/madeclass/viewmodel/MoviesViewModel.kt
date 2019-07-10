@@ -3,11 +3,15 @@ package com.felix.madeclass.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.content.Context
+import android.support.design.widget.Snackbar
 import android.util.Log
+import android.widget.Toast
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.felix.madeclass.R
 
 import com.felix.madeclass.model.Movie
 import org.json.JSONObject
@@ -35,17 +39,20 @@ class MoviesViewModel : ViewModel(){
                                     movie.photoHigh = "https://image.tmdb.org/t/p/original/" + movieObj.get("poster_path").toString()
                                     movie.photoLow = "https://image.tmdb.org/t/p/w154/" + movieObj.get("poster_path").toString()
                                     movie.rating = movieObj.get("vote_average").toString()
-                                    movie.release_date = movieObj.get("release_date").toString()
+                                    movie.releaseDate = movieObj.get("release_date").toString()
                                     movie.photoBackdropLow =  "https://image.tmdb.org/t/p/original/" + movieObj.get("backdrop_path").toString()
                                     movie.photoBackdropHigh =  "https://image.tmdb.org/t/p/original/" + movieObj.get("backdrop_path").toString()
 
                                     listItem.add(movie)
                                 }
-
+                                listMovie.postValue(listItem)
+                            }else{
+                                listMovie.postValue(null)
                             }
-                            listMovie.postValue(listItem)
+
                         }
                         override fun onError(anError: ANError?) {
+
                         }
                     })
         }catch (e:Exception){
@@ -59,7 +66,6 @@ class MoviesViewModel : ViewModel(){
     }
 
     companion object{
-        private val API_KEY = "6b7475ec840c3b36442bd75785b232d9"
         private var listMovie: MutableLiveData<ArrayList<Movie>> = MutableLiveData()
     }
 }

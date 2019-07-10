@@ -27,27 +27,20 @@ class DetailMovieActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_movie)
 
-        val txtTitle: TextView
-        val txtOverview: TextView
-        val txtRating: TextView
-        val txtReleaseDate: TextView
-        val imgBackdrop: ImageView
-        val imgPoster: ImageView
+        val txtTitle: TextView = findViewById(R.id.tvMovieTitle)
+        val txtOverview: TextView = findViewById(R.id.tvMovieOverview)
+        val txtRating: TextView = findViewById(R.id.tvMovieRating)
+        val txtReleaseDate: TextView = findViewById(R.id.tvMovieReleaseDate)
+        val imgBackdrop: ImageView = findViewById(R.id.ivMovieBackdrop)
+        val imgPoster: ImageView = findViewById(R.id.ivMoviePoster)
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-        txtTitle = findViewById(R.id.tvMovieTitle)
-        txtOverview = findViewById(R.id.tvMovieOverview)
-        txtRating = findViewById(R.id.tvMovieRating)
-        txtReleaseDate = findViewById(R.id.tvMovieReleaseDate)
-        imgBackdrop = findViewById(R.id.ivMovieBackdrop)
-        imgPoster = findViewById(R.id.ivMoviePoster)
 
         val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
         val title = movie.title
         val overview = movie.overview
         val rating = movie.rating
-        val releaseDate = movie.release_date
+        val releaseDate = movie.releaseDate
         Glide.with(baseContext)
                 .load(movie.photoBackdropHigh)
                 .fallback(R.drawable.no_image_available)
@@ -74,8 +67,6 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val TAG = "DetailMovieActivity"
-
         private val EXTRA_MOVIE = "extra_movie"
     }
 }

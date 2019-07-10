@@ -18,8 +18,6 @@ import com.felix.madeclass.model.Movie
 import java.util.ArrayList
 
 
-
-
 class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
 
@@ -37,19 +35,19 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        viewHolder.bind(listMovie!![i])
+        viewHolder.bind(listMovie[i])
 
         viewHolder.layoutParent.setOnClickListener { v ->
             val movie = Movie()
 
-            movie.title = listMovie!![viewHolder.adapterPosition].title
-            movie.overview = listMovie!![viewHolder.adapterPosition].overview
-            movie.rating = listMovie!![viewHolder.adapterPosition].rating
-            movie.release_date = listMovie!![viewHolder.adapterPosition].release_date
-            movie.photoHigh = listMovie!![viewHolder.adapterPosition].photoHigh
-            movie.photoLow = listMovie!![viewHolder.adapterPosition].photoLow
-            movie.photoBackdropHigh = listMovie!![viewHolder.adapterPosition].photoBackdropHigh
-            movie.photoBackdropLow = listMovie!![viewHolder.adapterPosition].photoBackdropLow
+            movie.title = listMovie[viewHolder.adapterPosition].title
+            movie.overview = listMovie[viewHolder.adapterPosition].overview
+            movie.rating = listMovie[viewHolder.adapterPosition].rating
+            movie.releaseDate = listMovie[viewHolder.adapterPosition].releaseDate
+            movie.photoHigh = listMovie[viewHolder.adapterPosition].photoHigh
+            movie.photoLow = listMovie[viewHolder.adapterPosition].photoLow
+            movie.photoBackdropHigh = listMovie[viewHolder.adapterPosition].photoBackdropHigh
+            movie.photoBackdropLow = listMovie[viewHolder.adapterPosition].photoBackdropLow
 
             val toDetail = Intent(v.context, DetailMovieActivity::class.java)
             toDetail.putExtra("extra_movie", movie)
@@ -58,34 +56,24 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
     }
 
     override fun getItemCount(): Int {
-        return listMovie!!.size
+        return listMovie.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val txtTitle: TextView
-        private val txtRating: TextView
-        private val txtReleaseDate: TextView
-        private val imgPoster: ImageView
-        internal val layoutParent: LinearLayout
-
-        init {
-
-            txtRating = itemView.findViewById(R.id.tvMovieRating)
-            txtTitle = itemView.findViewById(R.id.tvMovieTitle)
-            txtReleaseDate = itemView.findViewById(R.id.tvReleaseDate)
-            imgPoster = itemView.findViewById(R.id.ivMoviePoster)
-            layoutParent = itemView.findViewById(R.id.lvParentMovie)
-
-        }
+        private val txtTitle: TextView = itemView.findViewById(R.id.tvMovieTitle)
+        private val txtRating: TextView = itemView.findViewById(R.id.tvMovieRating)
+        private val txtReleaseDate: TextView = itemView.findViewById(R.id.tvReleaseDate)
+        private val imgPoster: ImageView = itemView.findViewById(R.id.ivMoviePoster)
+        internal val layoutParent: LinearLayout = itemView.findViewById(R.id.lvParentMovie)
 
         fun bind(movie: Movie) {
             txtTitle.text = movie.title
             txtRating.text = movie.rating
-            txtReleaseDate.text = movie.release_date
+            txtReleaseDate.text = movie.releaseDate
             Glide.with(context)
                     .load(movie.photoHigh)
-                    .fallback(com.felix.madeclass.R.drawable.no_image_available)
+                    .fallback(R.drawable.no_image_available)
                     .thumbnail(
                             Glide.with(context)
                                     .load(movie.photoLow)

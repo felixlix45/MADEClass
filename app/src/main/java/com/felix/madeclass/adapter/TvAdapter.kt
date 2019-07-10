@@ -43,7 +43,7 @@ class TvAdapter(private val context: Context) : RecyclerView.Adapter<TvAdapter.V
             tvShow.title = listTv[viewHolder.adapterPosition].title
             tvShow.overview = listTv[viewHolder.adapterPosition].overview
             tvShow.rating = listTv[viewHolder.adapterPosition].rating
-            tvShow.release_date = listTv[viewHolder.adapterPosition].release_date
+            tvShow.releaseDate = listTv[viewHolder.adapterPosition].releaseDate
             tvShow.photoHigh = listTv[viewHolder.adapterPosition].photoHigh
             tvShow.photoLow = listTv[viewHolder.adapterPosition].photoLow
             tvShow.photoBackdropHigh = listTv[viewHolder.adapterPosition].photoBackdropHigh
@@ -62,23 +62,15 @@ class TvAdapter(private val context: Context) : RecyclerView.Adapter<TvAdapter.V
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val txtTitle: TextView
-        private val txtRating: TextView
-        private val txtReleaseDate: TextView
-        private val imgPoster: ImageView
-        internal val parentLayout: LinearLayout
-
-        init {
-            txtRating = itemView.findViewById(R.id.tvTvRating)
-            txtReleaseDate = itemView.findViewById(R.id.tvTvReleaseDate)
-            txtTitle = itemView.findViewById(R.id.tvTvTitle)
-            imgPoster = itemView.findViewById(R.id.ivTvPoster)
-            parentLayout = itemView.findViewById(R.id.lvParentTv)
-        }
+        private val txtTitle: TextView = itemView.findViewById(R.id.tvTvTitle)
+        private val txtRating: TextView = itemView.findViewById(R.id.tvTvRating)
+        private val txtReleaseDate: TextView = itemView.findViewById(R.id.tvTvReleaseDate)
+        private val imgPoster: ImageView = itemView.findViewById(R.id.ivTvPoster)
+        internal val parentLayout: LinearLayout = itemView.findViewById(R.id.lvParentTv)
 
         fun bind(tvShow: TvShow) {
             txtTitle.text = tvShow.title
-            txtReleaseDate.text = tvShow.release_date
+            txtReleaseDate.text = tvShow.releaseDate
             txtRating.text = tvShow.rating
             Glide.with(context)
                     .load(tvShow.photoHigh)

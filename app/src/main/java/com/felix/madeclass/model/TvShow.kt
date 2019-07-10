@@ -9,7 +9,7 @@ class TvShow() : Parcelable {
     var photoBackdropHigh: String? = null
     var photoBackdropLow: String? = null
     var title: String? = null
-    var release_date: String? = null
+    var releaseDate: String? = null
     var rating: String? = null
     var overview: String? = null
 
@@ -19,7 +19,7 @@ class TvShow() : Parcelable {
         photoBackdropHigh = parcel.readString()
         photoBackdropLow = parcel.readString()
         title = parcel.readString()
-        release_date = parcel.readString()
+        releaseDate = parcel.readString()
         rating = parcel.readString()
         overview = parcel.readString()
     }
@@ -30,7 +30,7 @@ class TvShow() : Parcelable {
         parcel.writeString(photoBackdropHigh)
         parcel.writeString(photoBackdropLow)
         parcel.writeString(title)
-        parcel.writeString(release_date)
+        parcel.writeString(releaseDate)
         parcel.writeString(rating)
         parcel.writeString(overview)
     }

@@ -26,25 +26,19 @@ class DetailTvShowActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_tv_show)
 
-        val txtTitle: TextView
-        val txtOverview: TextView
-        val txtRating: TextView
-        val txtReleaseDate: TextView
-        val imgPoster: ImageView
+        val txtTitle: TextView = findViewById(R.id.tvTvTitle)
+        val txtOverview: TextView = findViewById(R.id.tvTvOverview)
+        val txtRating: TextView = findViewById(R.id.tvTvRating)
+        val txtReleaseDate: TextView = findViewById(R.id.tvTvReleaseDate)
+        val imgPoster: ImageView = findViewById(R.id.ivTvPoster)
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-        txtTitle = findViewById(R.id.tvTvTitle)
-        txtOverview = findViewById(R.id.tvTvOverview)
-        txtRating = findViewById(R.id.tvTvRating)
-        txtReleaseDate = findViewById(R.id.tvTvReleaseDate)
-        imgPoster = findViewById(R.id.ivTvPoster)
 
         val tvShow = intent.getParcelableExtra<TvShow>(EXTRA_TV)
         val title = tvShow.title
         val overview = tvShow.overview
         val rating = tvShow.rating
-        val releaseDate = tvShow.release_date
+        val releaseDate = tvShow.releaseDate
 
         txtTitle.text = title
         txtOverview.text = overview
@@ -63,7 +57,6 @@ class DetailTvShowActivity : AppCompatActivity() {
     }
 
     companion object {
-
         private val EXTRA_TV = "extra_tv"
     }
 }
