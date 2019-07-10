@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 import com.felix.madeclass.DetailTvShowActivity
 import com.felix.madeclass.R
@@ -33,7 +34,8 @@ class TvAdapter(private val context: Context, private val listTv: ArrayList<TvSh
             tvShow.overview = listTv[viewHolder.adapterPosition].overview
             tvShow.rating = listTv[viewHolder.adapterPosition].rating
             tvShow.release_date = listTv[viewHolder.adapterPosition].release_date
-            tvShow.photo = listTv[viewHolder.adapterPosition].photo
+            tvShow.photoHigh = listTv[viewHolder.adapterPosition].photoHigh
+            tvShow.photoLow = listTv[viewHolder.adapterPosition].photoLow
             val toDetail = Intent(v.context, DetailTvShowActivity::class.java)
             toDetail.putExtra("extra_tv", tvShow)
             v.context.startActivity(toDetail)
@@ -65,7 +67,13 @@ class TvAdapter(private val context: Context, private val listTv: ArrayList<TvSh
             txtTitle.text = tvShow.title
             txtReleaseDate.text = tvShow.release_date
             txtRating.text = tvShow.rating
-            imgPoster.setImageResource(tvShow.photo)
+            Glide.with(context)
+                    .load(tvShow.photoHigh)
+                    .thumbnail(
+                            Glide.with(context)
+                                    .load(tvShow.photoLow)
+                    )
+                    .into(imgPoster)
         }
     }
 }

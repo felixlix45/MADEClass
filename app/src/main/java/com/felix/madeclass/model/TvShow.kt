@@ -4,14 +4,16 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class TvShow() : Parcelable {
-    var photo: Int = 0
+    var photoHigh: String? = null
+    var photoLow: String? = null
     var title: String? = null
     var release_date: String? = null
     var rating: String? = null
     var overview: String? = null
 
     constructor(parcel: Parcel) : this() {
-        photo = parcel.readInt()
+        photoHigh = parcel.readString()
+        photoLow = parcel.readString()
         title = parcel.readString()
         release_date = parcel.readString()
         rating = parcel.readString()
@@ -19,7 +21,8 @@ class TvShow() : Parcelable {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(photo)
+        parcel.writeString(photoHigh)
+        parcel.writeString(photoLow)
         parcel.writeString(title)
         parcel.writeString(release_date)
         parcel.writeString(rating)
@@ -39,4 +42,5 @@ class TvShow() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 }

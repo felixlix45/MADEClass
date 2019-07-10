@@ -7,12 +7,22 @@
     tools:context=".MainActivity"
     android:id="@+id/rootActivity">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_nav">
-    </FrameLayout>
+        android:fitsSystemWindows="true"
+        android:layout_above="@id/bottom_nav"
+        android:id="@+id/coordinatorLayout">
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_nav"

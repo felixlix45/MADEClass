@@ -36,6 +36,8 @@ class MovieAdapter(private var context: Context, var listMovie: ArrayList<Movie>
             movie.release_date = listMovie!![viewHolder.adapterPosition].release_date
             movie.photoHigh = listMovie!![viewHolder.adapterPosition].photoHigh
             movie.photoLow = listMovie!![viewHolder.adapterPosition].photoLow
+            movie.photoBackdropHigh = listMovie!![viewHolder.adapterPosition].photoBackdropHigh
+            movie.photoBackdropLow = listMovie!![viewHolder.adapterPosition].photoBackdropLow
             val toDetail = Intent(v.context, DetailMovieActivity::class.java)
             toDetail.putExtra("extra_movie", movie)
             v.context.startActivity(toDetail)

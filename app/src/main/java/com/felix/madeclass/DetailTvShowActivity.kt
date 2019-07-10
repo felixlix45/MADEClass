@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 import com.felix.madeclass.model.TvShow
 
@@ -44,13 +45,18 @@ class DetailTvShowActivity : AppCompatActivity() {
         val overview = tvShow.overview
         val rating = tvShow.rating
         val releaseDate = tvShow.release_date
-        val poster = tvShow.photo
 
         txtTitle.text = title
         txtOverview.text = overview
         txtRating.text = rating
         txtReleaseDate.text = releaseDate
-        imgPoster.setImageResource(poster)
+        Glide.with(baseContext)
+                .load(tvShow.photoHigh)
+                .thumbnail(
+                        Glide.with(baseContext)
+                                .load(tvShow.photoLow)
+                )
+                .into(imgPoster)
 
         supportActionBar!!.title = title
     }

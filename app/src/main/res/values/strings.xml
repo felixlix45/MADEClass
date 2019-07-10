@@ -13,6 +13,7 @@
     <string name="tv_release_date">TV Show Release Date</string>
     <string name="heart_icon">Heart Icon</string>
     <string name="url_movie">https://api.themoviedb.org/3/discover/movie?api_key=%1$s&amp;language=en-US</string>
+    <string name="url_tv">https://api.themoviedb.org/3/discover/tv?api_key=%1$s&amp;language=en-US</string>
 
     <string-array name="movieTitle">
         <item>A Star Is Born</item>

@@ -6,6 +6,8 @@ import android.os.Parcelable
 class Movie() : Parcelable {
     var photoHigh: String? = null
     var photoLow: String? = null
+    var photoBackdropHigh: String? = null
+    var photoBackdropLow: String? = null
     var title: String? = null
     var release_date: String? = null
     var rating: String? = null
@@ -14,6 +16,8 @@ class Movie() : Parcelable {
     constructor(parcel: Parcel) : this() {
         photoHigh = parcel.readString()
         photoLow = parcel.readString()
+        photoBackdropHigh = parcel.readString()
+        photoBackdropLow = parcel.readString()
         title = parcel.readString()
         release_date = parcel.readString()
         rating = parcel.readString()
@@ -23,6 +27,8 @@ class Movie() : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(photoHigh)
         parcel.writeString(photoLow)
+        parcel.writeString(photoBackdropHigh)
+        parcel.writeString(photoBackdropLow)
         parcel.writeString(title)
         parcel.writeString(release_date)
         parcel.writeString(rating)
@@ -42,6 +48,5 @@ class Movie() : Parcelable {
             return arrayOfNulls(size)
         }
     }
-
 
 }
