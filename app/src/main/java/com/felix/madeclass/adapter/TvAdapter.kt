@@ -17,7 +17,16 @@ import com.felix.madeclass.model.TvShow
 
 import java.util.ArrayList
 
-class TvAdapter(private val context: Context, private val listTv: ArrayList<TvShow>) : RecyclerView.Adapter<TvAdapter.ViewHolder>() {
+class TvAdapter(private val context: Context) : RecyclerView.Adapter<TvAdapter.ViewHolder>() {
+
+
+    private val listTv = ArrayList<TvShow>()
+
+    fun setData(tv: ArrayList<TvShow>){
+        listTv.clear()
+        listTv.addAll(tv)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val v = LayoutInflater.from(context).inflate(R.layout.item_tv, viewGroup, false)
@@ -37,6 +46,8 @@ class TvAdapter(private val context: Context, private val listTv: ArrayList<TvSh
             tvShow.release_date = listTv[viewHolder.adapterPosition].release_date
             tvShow.photoHigh = listTv[viewHolder.adapterPosition].photoHigh
             tvShow.photoLow = listTv[viewHolder.adapterPosition].photoLow
+            tvShow.photoBackdropHigh = listTv[viewHolder.adapterPosition].photoBackdropHigh
+            tvShow.photoBackdropLow = listTv[viewHolder.adapterPosition].photoBackdropLow
 
             val toDetail = Intent(v.context, DetailTvShowActivity::class.java)
             toDetail.putExtra("extra_tv", tvShow)

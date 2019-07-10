@@ -26,8 +26,8 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
     private var listMovie = ArrayList<Movie>()
 
     fun setData(movies: ArrayList<Movie>){
-        listMovie!!.clear()
-        listMovie!!.addAll(movies)
+        listMovie.clear()
+        listMovie.addAll(movies)
         notifyDataSetChanged()
     }
 

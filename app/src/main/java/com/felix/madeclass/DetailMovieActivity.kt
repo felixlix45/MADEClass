@@ -53,7 +53,7 @@ class DetailMovieActivity : AppCompatActivity() {
                 .fallback(R.drawable.no_image_available)
                 .thumbnail(
                         Glide.with(baseContext)
-                                .load(movie.photoBackdropLow)
+                                .load(R.drawable.inkling_spinner)
                 )
                 .into(imgBackdrop)
         Glide.with(baseContext)
@@ -64,7 +64,6 @@ class DetailMovieActivity : AppCompatActivity() {
                                 .load(movie.photoLow)
                 )
                 .into(imgPoster)
-        Log.e(TAG, movie.photoBackdropHigh.toString())
         txtTitle.text = title
         txtOverview.text = overview
         txtRating.text = rating

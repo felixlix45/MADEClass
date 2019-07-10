@@ -1,6 +1,10 @@
 package com.felix.madeclass
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProviders
 import android.content.res.TypedArray
+import android.media.tv.TvView
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -18,6 +22,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 
 import com.felix.madeclass.adapter.TvAdapter
 import com.felix.madeclass.model.TvShow
+import com.felix.madeclass.viewmodel.TvViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
@@ -25,78 +30,40 @@ import java.util.ArrayList
 
 class TvFragment : Fragment() {
 
-    private var rvTV: RecyclerView? = null
-    private var tvList: ArrayList<TvShow>? = null
+    private lateinit var rvTV: RecyclerView
+
     lateinit var shimmerFrameLayout: ShimmerFrameLayout
+
+    private lateinit var tvViewModel: TvViewModel
+    private lateinit var tvAdapter: TvAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_tv, container, false)
+        val url = getString(R.string.url_tv, API_KEY)
+
+        tvViewModel = ViewModelProviders.of(requireActivity()).get(TvViewModel::class.java)
+        tvViewModel.getTvs().observe(this, Observer<ArrayList<TvShow>>{tvList ->
+            if(tvList!=null){
+                tvAdapter.setData(tvList)
+                shimmerFrameLayout.stopShimmer()
+                shimmerFrameLayout.visibility = View.GONE
+            }
+        })
+
+        tvViewModel.setTv(url)
+        tvAdapter = TvAdapter(requireActivity())
+        tvAdapter.notifyDataSetChanged()
+
         rvTV = v.findViewById(R.id.rvTV)
+        rvTV.layoutManager = LinearLayoutManager(requireActivity())
+        rvTV.adapter = tvAdapter
+
         shimmerFrameLayout = v.findViewById(R.id.shimmer_container)
-        addItem()
 
         return v
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        AndroidNetworking.forceCancelAll()
-    }
 
-
-    private fun showRecyclerView() {
-        val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(activity)
-        rvTV!!.layoutManager = linearLayoutManager
-        val tvAdapter = TvAdapter(requireActivity(), tvList!!)
-        tvAdapter.notifyDataSetChanged()
-        rvTV!!.adapter = tvAdapter
-    }
-
-    private fun addItem() {
-        tvList = ArrayList()
-
-        shimmerFrameLayout.startShimmer()
-        shimmerFrameLayout.visibility = View.VISIBLE
-
-        val url = resources.getString(R.string.url_tv, API_KEY)
-        AndroidNetworking.initialize(requireActivity())
-
-        AndroidNetworking.get(url)
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(object : JSONObjectRequestListener{
-                    override fun onResponse(response: JSONObject?) {
-                        shimmerFrameLayout.stopShimmer()
-                        shimmerFrameLayout.visibility = View.GONE
-                        if(response != null){
-                            val tvArr = response.getJSONArray("results")
-                            for(i in 0 until tvArr.length()){
-                                val tvObj = tvArr.getJSONObject(i)
-                                val tv = TvShow()
-
-                                tv.title = tvObj.get("name").toString()
-                                tv.overview = tvObj.get("overview").toString()
-                                tv.photoHigh = "https://image.tmdb.org/t/p/original/" + tvObj.get("poster_path").toString()
-                                tv.photoLow = "https://image.tmdb.org/t/p/w154/" + tvObj.get("poster_path").toString()
-                                tv.rating = tvObj.get("vote_average").toString()
-                                tv.release_date = tvObj.get("first_air_date").toString()
-
-                                tvList!!.add(tv)
-
-                            }
-                            showRecyclerView()
-                        }else{
-                            Snackbar.make(activity!!.findViewById(R.id.coordinatorLayout), "No Data Available", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                    override fun onError(anError: ANError?) {
-                        if(anError!!.errorDetail == "connectionError"){
-                            Snackbar.make(activity!!.findViewById(R.id.coordinatorLayout), "Err... Connection Error", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                })
-    }
 
     companion object{
         private val TAG = "TvFragment"
