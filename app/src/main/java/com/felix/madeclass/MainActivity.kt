@@ -27,21 +27,21 @@ class MainActivity : AppCompatActivity() {
         when (menuItem.itemId) {
             R.id.title_movies -> {
                 selectedFragment = MoviesFragment()
-//                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName).commit()
             }
             R.id.title_tv_show -> {
                 selectedFragment = TvFragment()
-//                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName).commit()
             }
         }
 
-        val currFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-
-        if(selectedFragment!!.isHidden){
-            supportFragmentManager.beginTransaction().show(selectedFragment).commit()
-        }else{
-            supportFragmentManager.beginTransaction().add(R.id.fragment_container, selectedFragment).hide(currFragment!!).commit()
-        }
+//        val currFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+//
+//        if(selectedFragment!!.isHidden){
+//            supportFragmentManager.beginTransaction().show(selectedFragment).commit()
+//        }else{
+//            supportFragmentManager.beginTransaction().add(R.id.fragment_container, selectedFragment).hide(currFragment!!).commit()
+//        }
         true
     }
 
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
         val fragment: Fragment
         fragment = MoviesFragment()
-        supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
 
     }
 

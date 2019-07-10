@@ -17,11 +17,22 @@ import com.felix.madeclass.model.Movie
 
 import java.util.ArrayList
 
-class MovieAdapter(private var context: Context, var listMovie: ArrayList<Movie>?) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
+
+
+class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+
+
+    private var listMovie = ArrayList<Movie>()
+
+    fun setData(movies: ArrayList<Movie>){
+        listMovie!!.clear()
+        listMovie!!.addAll(movies)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        val itemRow = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false)
+        val itemRow = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_movie, viewGroup, false)
         return ViewHolder(itemRow)
     }
 
@@ -30,6 +41,7 @@ class MovieAdapter(private var context: Context, var listMovie: ArrayList<Movie>
 
         viewHolder.layoutParent.setOnClickListener { v ->
             val movie = Movie()
+
             movie.title = listMovie!![viewHolder.adapterPosition].title
             movie.overview = listMovie!![viewHolder.adapterPosition].overview
             movie.rating = listMovie!![viewHolder.adapterPosition].rating
@@ -38,6 +50,7 @@ class MovieAdapter(private var context: Context, var listMovie: ArrayList<Movie>
             movie.photoLow = listMovie!![viewHolder.adapterPosition].photoLow
             movie.photoBackdropHigh = listMovie!![viewHolder.adapterPosition].photoBackdropHigh
             movie.photoBackdropLow = listMovie!![viewHolder.adapterPosition].photoBackdropLow
+
             val toDetail = Intent(v.context, DetailMovieActivity::class.java)
             toDetail.putExtra("extra_movie", movie)
             v.context.startActivity(toDetail)
@@ -72,7 +85,7 @@ class MovieAdapter(private var context: Context, var listMovie: ArrayList<Movie>
             txtReleaseDate.text = movie.release_date
             Glide.with(context)
                     .load(movie.photoHigh)
-                    .fallback(R.drawable.no_image_available)
+                    .fallback(com.felix.madeclass.R.drawable.no_image_available)
                     .thumbnail(
                             Glide.with(context)
                                     .load(movie.photoLow)

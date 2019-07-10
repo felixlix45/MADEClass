@@ -38,6 +38,11 @@ class TvFragment : Fragment() {
         return v
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        AndroidNetworking.forceCancelAll()
+    }
+
 
     private fun showRecyclerView() {
         val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(activity)
@@ -81,7 +86,7 @@ class TvFragment : Fragment() {
                             }
                             showRecyclerView()
                         }else{
-                            Toast.makeText(requireActivity(), "No Data Available", Toast.LENGTH_SHORT).show()
+                            Snackbar.make(activity!!.findViewById(R.id.coordinatorLayout), "No Data Available", Toast.LENGTH_SHORT).show()
                         }
                     }
 

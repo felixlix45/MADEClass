@@ -30,12 +30,14 @@ class TvAdapter(private val context: Context, private val listTv: ArrayList<TvSh
 
         viewHolder.parentLayout.setOnClickListener { v ->
             val tvShow = TvShow()
+
             tvShow.title = listTv[viewHolder.adapterPosition].title
             tvShow.overview = listTv[viewHolder.adapterPosition].overview
             tvShow.rating = listTv[viewHolder.adapterPosition].rating
             tvShow.release_date = listTv[viewHolder.adapterPosition].release_date
             tvShow.photoHigh = listTv[viewHolder.adapterPosition].photoHigh
             tvShow.photoLow = listTv[viewHolder.adapterPosition].photoLow
+
             val toDetail = Intent(v.context, DetailTvShowActivity::class.java)
             toDetail.putExtra("extra_tv", tvShow)
             v.context.startActivity(toDetail)
@@ -69,6 +71,7 @@ class TvAdapter(private val context: Context, private val listTv: ArrayList<TvSh
             txtRating.text = tvShow.rating
             Glide.with(context)
                     .load(tvShow.photoHigh)
+                    .fallback(R.drawable.no_image_available)
                     .thumbnail(
                             Glide.with(context)
                                     .load(tvShow.photoLow)
