@@ -72,6 +72,7 @@ class MovieAdapter(private var context: Context, var listMovie: ArrayList<Movie>
             txtReleaseDate.text = movie.release_date
             Glide.with(context)
                     .load(movie.photoHigh)
+                    .fallback(R.drawable.no_image_available)
                     .thumbnail(
                             Glide.with(context)
                                     .load(movie.photoLow)

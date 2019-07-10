@@ -50,6 +50,7 @@ class DetailMovieActivity : AppCompatActivity() {
         val releaseDate = movie.release_date
         Glide.with(baseContext)
                 .load(movie.photoBackdropHigh)
+                .fallback(R.drawable.no_image_available)
                 .thumbnail(
                         Glide.with(baseContext)
                                 .load(movie.photoBackdropLow)
@@ -57,6 +58,7 @@ class DetailMovieActivity : AppCompatActivity() {
                 .into(imgBackdrop)
         Glide.with(baseContext)
                 .load(movie.photoHigh)
+                .fallback(R.drawable.no_image_available)
                 .thumbnail(
                         Glide.with(baseContext)
                                 .load(movie.photoLow)

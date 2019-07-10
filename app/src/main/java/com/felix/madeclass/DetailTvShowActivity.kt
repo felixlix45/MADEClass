@@ -52,6 +52,7 @@ class DetailTvShowActivity : AppCompatActivity() {
         txtReleaseDate.text = releaseDate
         Glide.with(baseContext)
                 .load(tvShow.photoHigh)
+                .fallback(R.drawable.no_image_available)
                 .thumbnail(
                         Glide.with(baseContext)
                                 .load(tvShow.photoLow)
