@@ -31,7 +31,7 @@ class MoviesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_movies, container, false)
-        val url:String = resources.getString(R.string.url_movie, API_KEY)
+        val url:String = resources.getString(R.string.url_movie, BuildConfig.API_KEY)
 
         moviesViewModel = ViewModelProviders.of(requireActivity()).get(MoviesViewModel::class.java)
         moviesViewModel.getMovies().observe(this, Observer<ArrayList<Movie>>{ movieList ->
@@ -55,12 +55,5 @@ class MoviesFragment : Fragment() {
         shimmerFrameLayout = v.findViewById(R.id.shimmer_container)
 
         return v
-    }
-
-
-
-
-    companion object {
-        private val API_KEY = "6b7475ec840c3b36442bd75785b232d9"
     }
 }

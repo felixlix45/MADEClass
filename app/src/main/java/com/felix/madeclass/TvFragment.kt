@@ -29,7 +29,7 @@ class TvFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_tv, container, false)
-        val url = getString(R.string.url_tv, API_KEY)
+        val url = getString(R.string.url_tv, BuildConfig.API_KEY)
 
         tvViewModel = ViewModelProviders.of(requireActivity()).get(TvViewModel::class.java)
         tvViewModel.getTvs().observe(this, Observer<ArrayList<TvShow>>{tvList ->
@@ -55,9 +55,4 @@ class TvFragment : Fragment() {
         return v
     }
 
-
-
-    companion object{
-        private val API_KEY = "6b7475ec840c3b36442bd75785b232d9"
-    }
 }

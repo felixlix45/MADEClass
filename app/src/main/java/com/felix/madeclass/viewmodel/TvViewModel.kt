@@ -16,6 +16,8 @@ import java.lang.Exception
 
 class TvViewModel : ViewModel(){
 
+    private var listTv: MutableLiveData<ArrayList<TvShow>> = MutableLiveData()
+
     fun setTv(url: String) {
         var listItem: ArrayList<TvShow> = ArrayList()
         try{
@@ -58,9 +60,5 @@ class TvViewModel : ViewModel(){
 
     fun getTvs(): LiveData<ArrayList<TvShow>> {
         return listTv
-    }
-
-    companion object{
-        private var listTv: MutableLiveData<ArrayList<TvShow>> = MutableLiveData()
     }
 }

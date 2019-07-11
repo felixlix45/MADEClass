@@ -32,7 +32,12 @@ class MainActivity : AppCompatActivity() {
                 selectedFragment = TvFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName).commit()
             }
+            R.id.title_favorites ->{
+                selectedFragment = FavoritesFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName).commit()
+            }
         }
+
         true
     }
 
@@ -73,7 +78,6 @@ class MainActivity : AppCompatActivity() {
         val fragment: Fragment
         fragment = MoviesFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
-
     }
 
 

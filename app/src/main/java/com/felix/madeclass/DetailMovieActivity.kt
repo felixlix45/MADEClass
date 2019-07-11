@@ -1,14 +1,13 @@
 package com.felix.madeclass
 
+import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
-
 import com.felix.madeclass.model.Movie
 
 class DetailMovieActivity : AppCompatActivity() {
@@ -36,34 +35,39 @@ class DetailMovieActivity : AppCompatActivity() {
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
-        val title = movie.title
-        val overview = movie.overview
-        val rating = movie.rating
-        val releaseDate = movie.releaseDate
-        Glide.with(baseContext)
-                .load(movie.photoBackdropHigh)
-                .fallback(R.drawable.no_image_available)
-                .thumbnail(
-                        Glide.with(baseContext)
-                                .load(R.drawable.inkling_spinner)
-                )
-                .into(imgBackdrop)
-        Glide.with(baseContext)
-                .load(movie.photoHigh)
-                .fallback(R.drawable.no_image_available)
-                .thumbnail(
-                        Glide.with(baseContext)
-                                .load(movie.photoLow)
-                )
-                .into(imgPoster)
-        txtTitle.text = title
-        txtOverview.text = overview
-        txtRating.text = rating
-        txtReleaseDate.text = releaseDate
+        if (intent.getParcelableExtra<Movie>(EXTRA_MOVIE) != null) {
+            val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
+            val title = movie.title
+            val overview = movie.overview
+            val rating = movie.rating
+            val releaseDate = movie.releaseDate
+            Glide.with(baseContext)
+                    .load(movie.photoBackdropHigh)
+                    .fallback(R.drawable.no_image_available)
+                    .thumbnail(
+                            Glide.with(baseContext)
+                                    .load(R.drawable.inkling_spinner)
+                    )
+                    .into(imgBackdrop)
+            Glide.with(baseContext)
+                    .load(movie.photoHigh)
+                    .fallback(R.drawable.no_image_available)
+                    .thumbnail(
+                            Glide.with(baseContext)
+                                    .load(movie.photoLow)
+                    )
+                    .into(imgPoster)
+            txtTitle.text = title
+            txtOverview.text = overview
+            txtRating.text = rating
+            txtReleaseDate.text = releaseDate
 
 
-        supportActionBar!!.title = title
+            supportActionBar?.title = title
+        } else {
+            Toast.makeText(baseContext, "Err... Something went wrong", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     companion object {

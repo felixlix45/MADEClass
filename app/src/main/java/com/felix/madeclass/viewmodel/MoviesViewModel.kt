@@ -20,6 +20,7 @@ import java.lang.Exception
 
 class MoviesViewModel : ViewModel(){
 
+    private var listMovie: MutableLiveData<ArrayList<Movie>> = MutableLiveData()
     fun setMovie(url: String) {
         var listItem: ArrayList<Movie> = ArrayList()
         try{
@@ -65,7 +66,4 @@ class MoviesViewModel : ViewModel(){
         return listMovie
     }
 
-    companion object{
-        private var listMovie: MutableLiveData<ArrayList<Movie>> = MutableLiveData()
-    }
 }

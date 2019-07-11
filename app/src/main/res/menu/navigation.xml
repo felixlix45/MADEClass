@@ -13,4 +13,10 @@
         android:title="@string/title_tv_show"
         />
 
+    <item
+        android:id="@+id/title_favorites"
+        android:icon="@drawable/heart_48"
+        android:title="@string/favorites"
+        />
+
 </menu>

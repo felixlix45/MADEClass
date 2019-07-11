@@ -52,12 +52,14 @@
 
         <ImageView
             android:id="@+id/ivMoviePoster"
-            android:layout_width="111dp"
-            android:layout_height="155dp"
+            android:layout_width="116dp"
+            android:layout_height="166dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="250dp"
             android:elevation="6dp"
+            android:background="@color/colorLightGray"
+            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="@+id/roundRectView"
             app:layout_constraintTop_toTopOf="@+id/roundRectView" />
 
@@ -67,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="26dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:gravity="center"
@@ -107,7 +109,7 @@
                 android:id="@+id/tvMovieReleaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:text="@string/movie_release_date"
                 android:textAlignment="center"
                 android:textSize="18sp"
@@ -121,14 +123,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="157dp"
-            android:layout_marginLeft="157dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="157dp"
-            android:layout_marginRight="157dp"
             android:text="@string/overview"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
 
