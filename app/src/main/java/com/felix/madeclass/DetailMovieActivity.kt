@@ -52,6 +52,7 @@ class DetailMovieActivity : AppCompatActivity() {
             Glide.with(baseContext)
                     .load(movie.photoHigh)
                     .fallback(R.drawable.no_image_available)
+                    .fitCenter()
                     .thumbnail(
                             Glide.with(baseContext)
                                     .load(movie.photoLow)

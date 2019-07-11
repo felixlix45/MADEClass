@@ -52,14 +52,13 @@
 
         <ImageView
             android:id="@+id/ivMoviePoster"
-            android:layout_width="116dp"
-            android:layout_height="166dp"
+            android:layout_width="110dp"
+            android:layout_height="165dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="250dp"
             android:elevation="6dp"
             android:background="@color/colorLightGray"
-            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="@+id/roundRectView"
             app:layout_constraintTop_toTopOf="@+id/roundRectView" />
 

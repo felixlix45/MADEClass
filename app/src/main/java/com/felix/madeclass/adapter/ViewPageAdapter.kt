@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.felix.madeclass.MoviesFragment
 import com.felix.madeclass.TvFragment
 
-class ViewPageAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+class ViewPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         lateinit var selectedFragment: Fragment
         when(position){

@@ -11,6 +11,8 @@ import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.fragment.app.commit
+import androidx.fragment.app.Fragment
 import io.realm.Realm
 
 
@@ -20,23 +22,20 @@ class MainActivity : AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
-        val selectedFragment: androidx.fragment.app.Fragment
+        lateinit var selectedFragment: Fragment
 
         when (menuItem.itemId) {
             R.id.title_movies -> {
                 selectedFragment = MoviesFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName).commit()
             }
             R.id.title_tv_show -> {
                 selectedFragment = TvFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName).commit()
             }
             R.id.title_favorites ->{
                 selectedFragment = FavoritesFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName).commit()
             }
         }
-
+        supportFragmentManager.commit { replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName) }
         true
     }
 
@@ -76,9 +75,9 @@ class MainActivity : AppCompatActivity() {
         val navigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         navigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        val fragment: androidx.fragment.app.Fragment
+        val fragment: Fragment
         fragment = MoviesFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
+        supportFragmentManager.commit { replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName) }
     }
 
 }

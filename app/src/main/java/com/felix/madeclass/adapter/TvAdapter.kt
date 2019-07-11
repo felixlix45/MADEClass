@@ -2,7 +2,6 @@ package com.felix.madeclass.adapter
 
 import android.content.Context
 import android.content.Intent
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,19 +9,17 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
-
 import com.felix.madeclass.DetailTvShowActivity
 import com.felix.madeclass.R
 import com.felix.madeclass.model.TvShow
-
-import java.util.ArrayList
+import java.util.*
 
 class TvAdapter(private val context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<TvAdapter.ViewHolder>() {
 
 
     private val listTv = ArrayList<TvShow>()
 
-    fun setData(tv: ArrayList<TvShow>){
+    fun setData(tv: ArrayList<TvShow>) {
         listTv.clear()
         listTv.addAll(tv)
         notifyDataSetChanged()

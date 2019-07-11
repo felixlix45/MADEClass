@@ -14,8 +14,10 @@ class FavoritesFragment : androidx.fragment.app.Fragment() {
 
         val viewPager: ViewPager = v.findViewById(R.id.view_pager)
         val adapter = ViewPageAdapter(childFragmentManager)
+
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = adapter.count - 1
+
         val tabLayout: TabLayout = v.findViewById(R.id.tabs)
         tabLayout.setupWithViewPager(viewPager)
 

@@ -2,20 +2,18 @@ package com.felix.madeclass.adapter
 
 import android.content.Context
 import android.content.Intent
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-
 import com.felix.madeclass.DetailMovieActivity
 import com.felix.madeclass.R
 import com.felix.madeclass.model.Movie
-
-import java.util.ArrayList
+import java.util.*
 
 
 class MovieAdapter(var context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
@@ -23,7 +21,7 @@ class MovieAdapter(var context: Context) : androidx.recyclerview.widget.Recycler
 
     private var listMovie = ArrayList<Movie>()
 
-    fun setData(movies: ArrayList<Movie>){
+    fun setData(movies: ArrayList<Movie>) {
         listMovie.clear()
         listMovie.addAll(movies)
         notifyDataSetChanged()
@@ -59,7 +57,7 @@ class MovieAdapter(var context: Context) : androidx.recyclerview.widget.Recycler
         return listMovie.size
     }
 
-    inner class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val txtTitle: TextView = itemView.findViewById(R.id.tvMovieTitle)
         private val txtRating: TextView = itemView.findViewById(R.id.tvMovieRating)
