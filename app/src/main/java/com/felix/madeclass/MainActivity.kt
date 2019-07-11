@@ -3,17 +3,15 @@ package com.felix.madeclass
 import android.content.Intent
 import android.provider.Settings
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.fragment.app.Fragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import io.realm.gradle.Realm
+import io.realm.Realm
 
 
 class MainActivity : AppCompatActivity() {
@@ -71,6 +69,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Realm.init(this)
+
         coordinatorLayout = findViewById(R.id.coordinatorLayout)
 
         val navigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
@@ -80,6 +80,5 @@ class MainActivity : AppCompatActivity() {
         fragment = MoviesFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
     }
-
 
 }

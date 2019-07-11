@@ -1,14 +1,13 @@
 package com.felix.madeclass
 
-import androidx.core.app.NavUtils
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
 import com.bumptech.glide.Glide
-
 import com.felix.madeclass.model.TvShow
 
 class DetailTvShowActivity : AppCompatActivity() {
@@ -35,7 +34,7 @@ class DetailTvShowActivity : AppCompatActivity() {
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        if(intent.getParcelableExtra<TvShow>(EXTRA_TV)!= null){
+        if (intent.getParcelableExtra<TvShow>(EXTRA_TV) != null) {
             val tvShow = intent.getParcelableExtra<TvShow>(EXTRA_TV)
             val title = tvShow.title
             val overview = tvShow.overview
@@ -56,7 +55,7 @@ class DetailTvShowActivity : AppCompatActivity() {
                     .into(imgPoster)
 
             supportActionBar?.title = title
-        }else{
+        } else {
             Toast.makeText(baseContext, "Err... Something went wrong", Toast.LENGTH_SHORT).show()
         }
 

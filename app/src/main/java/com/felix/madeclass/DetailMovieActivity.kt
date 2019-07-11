@@ -1,12 +1,12 @@
 package com.felix.madeclass
 
 import android.os.Bundle
-import androidx.core.app.NavUtils
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
 import com.bumptech.glide.Glide
 import com.felix.madeclass.model.Movie
 
