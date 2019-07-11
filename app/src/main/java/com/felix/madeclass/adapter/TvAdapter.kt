@@ -2,7 +2,7 @@ package com.felix.madeclass.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ import com.felix.madeclass.model.TvShow
 
 import java.util.ArrayList
 
-class TvAdapter(private val context: Context) : RecyclerView.Adapter<TvAdapter.ViewHolder>() {
+class TvAdapter(private val context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<TvAdapter.ViewHolder>() {
 
 
     private val listTv = ArrayList<TvShow>()
@@ -60,7 +60,7 @@ class TvAdapter(private val context: Context) : RecyclerView.Adapter<TvAdapter.V
         return listTv.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         private val txtTitle: TextView = itemView.findViewById(R.id.tvTvTitle)
         private val txtRating: TextView = itemView.findViewById(R.id.tvTvRating)

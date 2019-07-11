@@ -2,7 +2,7 @@ package com.felix.madeclass.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +18,7 @@ import com.felix.madeclass.model.Movie
 import java.util.ArrayList
 
 
-class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(var context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
 
     private var listMovie = ArrayList<Movie>()
@@ -59,7 +59,7 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
         return listMovie.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         private val txtTitle: TextView = itemView.findViewById(R.id.tvMovieTitle)
         private val txtRating: TextView = itemView.findViewById(R.id.tvMovieRating)

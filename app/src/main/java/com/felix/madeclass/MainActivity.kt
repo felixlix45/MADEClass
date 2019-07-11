@@ -2,13 +2,13 @@ package com.felix.madeclass
 
 import android.content.Intent
 import android.provider.Settings
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.CoordinatorLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 
 import android.view.Menu
 import android.view.MenuItem
@@ -17,11 +17,11 @@ import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var coordinatorLayout: CoordinatorLayout
+    lateinit var coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout
     private var doubleBackToExitPressedOnce = false
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
-        val selectedFragment: Fragment
+        val selectedFragment: androidx.fragment.app.Fragment
 
         when (menuItem.itemId) {
             R.id.title_movies -> {
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         val navigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         navigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        val fragment: Fragment
+        val fragment: androidx.fragment.app.Fragment
         fragment = MoviesFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName).commit()
     }
