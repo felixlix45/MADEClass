@@ -47,6 +47,7 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
             movie.photoLow = listMovie[viewHolder.adapterPosition].photoLow
             movie.photoBackdropHigh = listMovie[viewHolder.adapterPosition].photoBackdropHigh
             movie.photoBackdropLow = listMovie[viewHolder.adapterPosition].photoBackdropLow
+            movie.adult = listMovie[viewHolder.adapterPosition].adult
 
             val toDetail = Intent(v.context, DetailMovieActivity::class.java)
             toDetail.putExtra("extra_movie", movie)
@@ -64,7 +65,10 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
         private val txtRating: TextView = itemView.findViewById(R.id.tvMovieRating)
         private val txtReleaseDate: TextView = itemView.findViewById(R.id.tvReleaseDate)
         private val imgPoster: ImageView = itemView.findViewById(R.id.ivMoviePoster)
+        private val ivPG: ImageView = itemView.findViewById(R.id.ivParentalGuidance)
+        private val ivMA: ImageView = itemView.findViewById(R.id.ivMature)
         internal val layoutParent: LinearLayout = itemView.findViewById(R.id.lvParentMovie)
+
 
         fun bind(movie: Movie) {
             txtTitle.text = movie.title
@@ -82,6 +86,14 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
                                     .load(movie.photoLow)
                     )
                     .into(imgPoster)
+
+            if (movie.adult){
+                ivMA.visibility = View.VISIBLE
+                ivPG.visibility = View.GONE
+            }else{
+                ivMA.visibility = View.GONE
+                ivPG.visibility = View.VISIBLE
+            }
         }
     }
 }

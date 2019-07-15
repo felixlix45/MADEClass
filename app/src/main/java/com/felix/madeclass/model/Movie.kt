@@ -12,6 +12,7 @@ class Movie() : Parcelable {
     var releaseDate: String? = null
     var rating: String? = null
     var overview: String? = null
+    var adult: Boolean = false
 
     constructor(parcel: Parcel) : this() {
         photoHigh = parcel.readString()
@@ -22,6 +23,7 @@ class Movie() : Parcelable {
         releaseDate = parcel.readString()
         rating = parcel.readString()
         overview = parcel.readString()
+        adult = parcel.readByte() != 0.toByte()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -33,6 +35,7 @@ class Movie() : Parcelable {
         parcel.writeString(releaseDate)
         parcel.writeString(rating)
         parcel.writeString(overview)
+        parcel.writeByte(if (adult) 1 else 0)
     }
 
     override fun describeContents(): Int {
@@ -48,5 +51,6 @@ class Movie() : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 
 }

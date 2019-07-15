@@ -19,8 +19,9 @@
     <string name="MoviePosterText">Movie Poster</string>
     <string name="shimmerposter">shimmerPoster</string>
     <string name="calendar_icon">calendar icon</string>
-    <string name="youtube_icon">Youtube Icon</string>
     <string name="trailer_text">Play Trailer</string>
+    <string name="parental_guidance_icon">Parental Guidance Icon</string>
+    <string name="mature_icon">Mature Icon</string>
 
 
 </resources>

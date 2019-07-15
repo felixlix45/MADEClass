@@ -27,12 +27,15 @@ class MainActivity : AppCompatActivity() {
         when (menuItem.itemId) {
             R.id.title_movies -> {
                 selectedFragment = MoviesFragment()
+                supportActionBar?.title = "Movies"
             }
             R.id.title_tv_show -> {
                 selectedFragment = TvFragment()
+                supportActionBar?.title = "TV Show"
             }
             R.id.title_favorites ->{
                 selectedFragment = FavoritesFragment()
+                supportActionBar?.title = "Favorites"
             }
         }
         supportFragmentManager.commit { replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName) }
@@ -78,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         val fragment: Fragment
         fragment = MoviesFragment()
         supportFragmentManager.commit { replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName) }
+        supportActionBar?.title = "Movies"
     }
 
 }
