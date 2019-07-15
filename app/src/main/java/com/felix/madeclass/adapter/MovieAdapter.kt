@@ -13,10 +13,11 @@ import com.bumptech.glide.Glide
 import com.felix.madeclass.DetailMovieActivity
 import com.felix.madeclass.R
 import com.felix.madeclass.model.Movie
+import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MovieAdapter(var context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
 
     private var listMovie = ArrayList<Movie>()
@@ -68,7 +69,11 @@ class MovieAdapter(var context: Context) : androidx.recyclerview.widget.Recycler
         fun bind(movie: Movie) {
             txtTitle.text = movie.title
             txtRating.text = movie.rating
-            txtReleaseDate.text = movie.releaseDate
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+            val dateFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
+            val date: Date = formatter.parse(movie.releaseDate)
+            val releaseDate = dateFormat.format(date).toString()
+            txtReleaseDate.text = releaseDate
             Glide.with(context)
                     .load(movie.photoHigh)
                     .fallback(R.drawable.no_image_available)

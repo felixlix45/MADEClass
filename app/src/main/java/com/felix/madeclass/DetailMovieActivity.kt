@@ -1,5 +1,6 @@
 package com.felix.madeclass
 
+
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
@@ -9,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import com.bumptech.glide.Glide
 import com.felix.madeclass.model.Movie
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class DetailMovieActivity : AppCompatActivity() {
 
@@ -16,10 +20,9 @@ class DetailMovieActivity : AppCompatActivity() {
         when (item.itemId) {
             android.R.id.home -> {
                 NavUtils.navigateUpFromSameTask(this)
-                return true
             }
-            else -> return super.onOptionsItemSelected(item)
         }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,14 +36,24 @@ class DetailMovieActivity : AppCompatActivity() {
         val imgBackdrop: ImageView = findViewById(R.id.ivMovieBackdrop)
         val imgPoster: ImageView = findViewById(R.id.ivMoviePoster)
 
+
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         if (intent.getParcelableExtra<Movie>(EXTRA_MOVIE) != null) {
+
+
             val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
             val title = movie.title
             val overview = movie.overview
             val rating = movie.rating
-            val releaseDate = movie.releaseDate
+            var releaseDate = movie.releaseDate
+
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+            val dateFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
+            val date: Date = formatter.parse(releaseDate)
+            releaseDate = dateFormat.format(date).toString()
+
+
             Glide.with(baseContext)
                     .load(movie.photoBackdropHigh)
                     .fallback(R.drawable.no_image_available)
@@ -52,7 +65,7 @@ class DetailMovieActivity : AppCompatActivity() {
             Glide.with(baseContext)
                     .load(movie.photoHigh)
                     .fallback(R.drawable.no_image_available)
-                    .fitCenter()
+                    .centerCrop()
                     .thumbnail(
                             Glide.with(baseContext)
                                     .load(movie.photoLow)
@@ -72,6 +85,6 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val EXTRA_MOVIE = "extra_movie"
+        private const val EXTRA_MOVIE = "extra_movie"
     }
 }

@@ -93,22 +93,17 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:contentDescription="@string/heart_icon"
                 android:paddingTop="2dp"
-                android:src="@drawable/heart_outline_96" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="2dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/colorGray" />
+                android:src="@drawable/star_filled_64" />
 
             <TextView
                 android:id="@+id/tvMovieReleaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp"
                 android:text="@string/movie_release_date"
                 android:textAlignment="center"
                 android:textSize="18sp"

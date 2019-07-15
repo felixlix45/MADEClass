@@ -62,6 +62,6 @@ class DetailTvShowActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val EXTRA_TV = "extra_tv"
+        private const val EXTRA_TV = "extra_tv"
     }
 }
