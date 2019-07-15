@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.felix.madeclass.DetailTvShowActivity
 import com.felix.madeclass.R
 import com.felix.madeclass.model.TvShow
+import java.text.SimpleDateFormat
 import java.util.*
 
 class TvAdapter(private val context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<TvAdapter.ViewHolder>() {
@@ -67,8 +68,13 @@ class TvAdapter(private val context: Context) : androidx.recyclerview.widget.Rec
 
         fun bind(tvShow: TvShow) {
             txtTitle.text = tvShow.title
-            txtReleaseDate.text = tvShow.releaseDate
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+            val dateFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
+            val date: Date = formatter.parse(tvShow.releaseDate)
+            val releaseDate = dateFormat.format(date).toString()
+            txtReleaseDate.text = releaseDate
             txtRating.text = tvShow.rating
+
             Glide.with(context)
                     .load(tvShow.photoHigh)
                     .fallback(R.drawable.no_image_available)

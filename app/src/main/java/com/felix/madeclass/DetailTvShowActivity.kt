@@ -50,7 +50,11 @@ class DetailTvShowActivity : AppCompatActivity() {
                     .fallback(R.drawable.no_image_available)
                     .thumbnail(
                             Glide.with(baseContext)
-                                    .load(R.drawable.inkling_spinner)
+                                    .load(tvShow.photoLow)
+                                    .thumbnail(
+                                            Glide.with(baseContext)
+                                                    .load(R.drawable.inkling_spinner)
+                                    )
                     )
                     .into(imgPoster)
 

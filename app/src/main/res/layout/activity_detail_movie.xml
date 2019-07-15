@@ -32,6 +32,14 @@
                 android:contentDescription="@string/movie_poster"
                 android:scaleType="centerCrop" />
 
+            <ImageButton
+                android:id="@+id/ibPlayTrailer"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/trailer_text"
+                android:background="@drawable/play_button_96"/>
+
         </com.github.florent37.shapeofview.shapes.RoundRectView>
 
         <TextView
@@ -47,20 +55,34 @@
             android:textSize="23sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/roundRectView"
-            app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
+            app:layout_constraintStart_toEndOf="@+id/roundRectView2"
             app:layout_constraintTop_toBottomOf="@+id/roundRectView" />
 
-        <ImageView
-            android:id="@+id/ivMoviePoster"
+        <com.github.florent37.shapeofview.shapes.RoundRectView
+            android:id="@+id/roundRectView2"
             android:layout_width="110dp"
             android:layout_height="165dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="250dp"
             android:elevation="6dp"
-            android:background="@color/colorLightGray"
             app:layout_constraintStart_toStartOf="@+id/roundRectView"
-            app:layout_constraintTop_toTopOf="@+id/roundRectView" />
+            app:layout_constraintTop_toTopOf="@+id/roundRectView"
+            app:shape_roundRect_bottomLeftRadius="20dp"
+            app:shape_roundRect_bottomRightRadius="20dp"
+            app:shape_roundRect_topLeftRadius="20dp"
+            app:shape_roundRect_topRightRadius="20dp">
+
+            <ImageView
+                android:id="@+id/ivMoviePoster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/movie_poster"
+                android:background="@color/colorLightGray"/>
+
+        </com.github.florent37.shapeofview.shapes.RoundRectView>
+
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -71,16 +93,28 @@
             android:layout_marginTop="26dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:gravity="center"
             android:orientation="horizontal"
+            android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivMoviePoster">
+            app:layout_constraintTop_toBottomOf="@+id/roundRectView2">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@string/heart_icon"
+                android:paddingTop="2dp"
+                android:src="@drawable/star_filled_64" />
 
             <TextView
                 android:id="@+id/tvMovieRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
                 android:gravity="end"
                 android:text="@string/movie_rating"
                 android:textAlignment="textEnd"
@@ -88,28 +122,28 @@
                 android:textStyle="italic" />
 
             <ImageView
-                android:id="@+id/imageView"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:contentDescription="@string/heart_icon"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:contentDescription="@string/calendar_icon"
                 android:paddingTop="2dp"
-                android:src="@drawable/star_filled_64" />
+                android:src="@drawable/calendar_64" />
 
             <TextView
                 android:id="@+id/tvMovieReleaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
                 android:text="@string/movie_release_date"
-                android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="italic" />
 
+
+
         </LinearLayout>
+
 
 
         <TextView
@@ -117,12 +151,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+
             android:layout_marginTop="16dp"
             android:text="@string/overview"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <TextView
             android:id="@+id/tvMovieOverview"

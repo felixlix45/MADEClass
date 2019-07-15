@@ -1,11 +1,13 @@
 package com.felix.madeclass
 
 
+import android.app.SearchManager
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NavUtils
 import com.bumptech.glide.Glide
@@ -35,7 +37,7 @@ class DetailMovieActivity : AppCompatActivity() {
         val txtReleaseDate: TextView = findViewById(R.id.tvMovieReleaseDate)
         val imgBackdrop: ImageView = findViewById(R.id.ivMovieBackdrop)
         val imgPoster: ImageView = findViewById(R.id.ivMoviePoster)
-
+        val ibPlayTrailer: ImageButton = findViewById(R.id.ibPlayTrailer)
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -53,28 +55,37 @@ class DetailMovieActivity : AppCompatActivity() {
             val date: Date = formatter.parse(releaseDate)
             releaseDate = dateFormat.format(date).toString()
 
-
             Glide.with(baseContext)
                     .load(movie.photoBackdropHigh)
                     .fallback(R.drawable.no_image_available)
                     .thumbnail(
                             Glide.with(baseContext)
-                                    .load(R.drawable.inkling_spinner)
+                                    .load(movie.photoBackdropLow)
+                                    .thumbnail(
+                                            Glide.with(baseContext)
+                                                    .load(R.drawable.inkling_spinner)
+                                    )
                     )
                     .into(imgBackdrop)
             Glide.with(baseContext)
                     .load(movie.photoHigh)
                     .fallback(R.drawable.no_image_available)
-                    .centerCrop()
                     .thumbnail(
                             Glide.with(baseContext)
-                                    .load(movie.photoLow)
+                                    .load(R.drawable.inkling_spinner)
                     )
                     .into(imgPoster)
             txtTitle.text = title
             txtOverview.text = overview
             txtRating.text = rating
             txtReleaseDate.text = releaseDate
+            val name = title?.replace("\\s+".toRegex(), "+")
+
+            ibPlayTrailer.setOnClickListener { v->
+                val toYT = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=" + name + "+trailer"))
+                v.context.startActivity(toYT)
+            }
+
 
 
             supportActionBar?.title = title

@@ -12,6 +12,7 @@ import com.felix.madeclass.adapter.MovieAdapter
 import com.felix.madeclass.model.Movie
 import com.felix.madeclass.viewmodel.MoviesViewModel
 import com.google.android.material.snackbar.Snackbar
+import androidx.recyclerview.widget.LinearLayoutManager
 
 
 class MoviesFragment : androidx.fragment.app.Fragment() {
@@ -43,7 +44,7 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
         movieAdapter.notifyDataSetChanged()
 
         rvMovie = v.findViewById(R.id.rvMovie)
-        rvMovie!!.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireActivity())
+        rvMovie!!.layoutManager = LinearLayoutManager(requireActivity())
         rvMovie!!.adapter = movieAdapter
 
         shimmerFrameLayout = v.findViewById(R.id.shimmer_container)
