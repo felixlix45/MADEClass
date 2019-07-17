@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.felix.madeclass.adapter.MovieAdapter
 import com.felix.madeclass.model.Movie
 import com.felix.madeclass.viewmodel.MoviesViewModel
 import com.google.android.material.snackbar.Snackbar
-import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_movies.*
 
 
 class MoviesFragment : androidx.fragment.app.Fragment() {
@@ -23,10 +24,12 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
     private lateinit var moviesViewModel: MoviesViewModel
     private lateinit var movieAdapter: MovieAdapter
 
-
+    private lateinit var url: String
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_movies, container, false)
-        val url: String = resources.getString(R.string.url_movie, BuildConfig.API_KEY)
+        url = resources.getString(R.string.url_movie, BuildConfig.API_KEY)
+
+        val swipeRefreshLayout = v.findViewById(R.id.swipeContainer) as SwipeRefreshLayout
 
         moviesViewModel = ViewModelProviders.of(requireActivity()).get(MoviesViewModel::class.java)
         moviesViewModel.getMovies().observe(this, Observer<ArrayList<Movie>> { movieList ->
@@ -39,16 +42,37 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
             }
         })
 
-        moviesViewModel.setMovie(url)
-        movieAdapter = MovieAdapter(requireContext())
-        movieAdapter.notifyDataSetChanged()
+        swipeRefreshLayout.setOnRefreshListener {
+            shimmerFrameLayout.visibility = View.VISIBLE
+            shimmerFrameLayout.startShimmer()
+            loadData()
+            rvMovie = v.findViewById(R.id.rvMovie)
+            buildRecycleView()
+            swipeContainer.isRefreshing = false
+        }
+
+        loadData()
+
+//        moviesViewModel.setMovie(url)
+//        movieAdapter = MovieAdapter(requireContext())
+//        movieAdapter.notifyDataSetChanged()
 
         rvMovie = v.findViewById(R.id.rvMovie)
-        rvMovie!!.layoutManager = LinearLayoutManager(requireActivity())
-        rvMovie!!.adapter = movieAdapter
+        buildRecycleView()
 
         shimmerFrameLayout = v.findViewById(R.id.shimmer_container)
 
         return v
+    }
+
+    private fun loadData(){
+
+        moviesViewModel.setMovie(url)
+        movieAdapter = MovieAdapter(requireContext())
+        movieAdapter.notifyDataSetChanged()
+    }
+    private fun buildRecycleView(){
+        rvMovie!!.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireActivity())
+        rvMovie!!.adapter = movieAdapter
     }
 }

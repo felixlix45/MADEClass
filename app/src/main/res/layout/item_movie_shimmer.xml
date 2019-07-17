@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="90dp"
         android:layout_height="125dp"
-    android:contentDescription="@string/shimmerposter"
+        android:contentDescription="@string/shimmerposter"
         android:background="@color/colorDarkGray"/>
 
     <LinearLayout

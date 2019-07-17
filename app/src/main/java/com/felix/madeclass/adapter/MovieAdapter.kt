@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.felix.madeclass.DetailMovieActivity
@@ -36,9 +36,10 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         viewHolder.bind(listMovie[i])
 
-        viewHolder.layoutParent.setOnClickListener { v ->
+        viewHolder.constraintLayout.setOnClickListener { v ->
             val movie = Movie()
 
+            movie.movieId = listMovie[viewHolder.adapterPosition].movieId
             movie.title = listMovie[viewHolder.adapterPosition].title
             movie.overview = listMovie[viewHolder.adapterPosition].overview
             movie.rating = listMovie[viewHolder.adapterPosition].rating
@@ -67,7 +68,7 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
         private val imgPoster: ImageView = itemView.findViewById(R.id.ivMoviePoster)
         private val ivPG: ImageView = itemView.findViewById(R.id.ivParentalGuidance)
         private val ivMA: ImageView = itemView.findViewById(R.id.ivMature)
-        internal val layoutParent: LinearLayout = itemView.findViewById(R.id.lvParentMovie)
+        internal val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.lvParentMovie)
 
 
         fun bind(movie: Movie) {
@@ -87,7 +88,7 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
                     )
                     .into(imgPoster)
 
-            if (movie.adult){
+            if (movie.adult == true){
                 ivMA.visibility = View.VISIBLE
                 ivPG.visibility = View.GONE
             }else{

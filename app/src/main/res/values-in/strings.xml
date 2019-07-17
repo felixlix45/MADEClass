@@ -12,13 +12,19 @@
     <string name="tv_rating">Rating TV</string>
     <string name="tv_release_date">Tanggal Rilis</string>
     <string name="heart_icon">Ikon Hati</string>
-    <string name="url_movie">https://api.themoviedb.org/3/discover/movie?api_key=%1$s&amp;language=id-IN</string>
-    <string name="url_tv">https://api.themoviedb.org/3/discover/tv?api_key=%1$s&amp;language=id-IN</string>
+    <string name="url_movie">https://api.themoviedb.org/3/discover/movie?api_key=%1$s&amp;language=id-IN&amp;include_adult=true</string>
+    <string name="url_movie_detail">https://api.themoviedb.org/3/movie/%1$s?api_key=%2$s&amp;language=id-IN</string>
+    <string name="url_tv">https://api.themoviedb.org/3/discover/tv?api_key=%1$s&amp;language=id-IN&amp;include_adult=true</string>
     <string name="favorites">Favorite</string>
     <string name="TvPosterText">Poster Tv</string>
     <string name="MoviePosterText">Poster Film</string>
     <string name="shimmerposter">shimmerPoster</string>
     <string name="calendar_icon">icon kalender</string>
     <string name="trailer_text">Play Trailer</string>
+    <string name="parental_guidance_icon">Parental Guidance Icon</string>
+    <string name="mature_icon">Mature Icon</string>
+    <string name="movie_duration">Durasi Film</string>
+    <string name="no_duration">- menit</string>
+    <string name="release_date">dd MMMM yyyy</string>
 
 </resources>

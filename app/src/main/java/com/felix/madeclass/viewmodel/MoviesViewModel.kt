@@ -29,6 +29,7 @@ class MoviesViewModel : ViewModel() {
                                     val movieObj = movieArr.getJSONObject(i)
                                     val movie = Movie()
 
+                                    movie.movieId = movieObj.get("id").toString()
                                     movie.title = movieObj.get("title").toString()
                                     movie.overview = movieObj.get("overview").toString()
                                     movie.photoHigh = "https://image.tmdb.org/t/p/original/" + movieObj.get("poster_path").toString()
@@ -37,7 +38,7 @@ class MoviesViewModel : ViewModel() {
                                     movie.releaseDate = movieObj.get("release_date").toString()
                                     movie.photoBackdropLow = "https://image.tmdb.org/t/p/w154/" + movieObj.get("backdrop_path").toString()
                                     movie.photoBackdropHigh = "https://image.tmdb.org/t/p/original/" + movieObj.get("backdrop_path").toString()
-
+                                    movie.adult = movieObj.getBoolean("adult")
                                     listItem.add(movie)
                                 }
                                 listMovie.postValue(listItem)

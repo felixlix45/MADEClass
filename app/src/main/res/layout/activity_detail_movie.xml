@@ -74,6 +74,7 @@
             app:shape_roundRect_topRightRadius="20dp">
 
             <ImageView
+                android:transitionName="poster"
                 android:id="@+id/ivMoviePoster"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -103,8 +104,6 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
                 android:contentDescription="@string/heart_icon"
                 android:paddingTop="2dp"
                 android:src="@drawable/star_filled_64" />
@@ -140,10 +139,48 @@
                 android:textSize="18sp"
                 android:textStyle="italic" />
 
-
-
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:contentDescription="@string/calendar_icon"
+                android:paddingTop="2dp"
+                android:src="@drawable/clock_64" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerMovieDuration"
+                android:layout_width="100dp"
+                android:layout_height="10dp"
+                android:background="@color/colorGray"/>
+
+            <TextView
+                android:id="@+id/tvMovieDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="@string/movie_duration"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:textStyle="italic" />
+        </LinearLayout>
 
 
         <TextView
@@ -157,7 +194,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
         <TextView
             android:id="@+id/tvMovieOverview"
