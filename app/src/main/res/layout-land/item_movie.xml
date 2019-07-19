@@ -77,7 +77,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
                 android:layout_marginTop="2dp"
                 android:text="@string/movie_release_date"
                 android:textSize="12sp" />
@@ -102,7 +101,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
                 android:text="@string/movie_rating"
                 android:textSize="12sp" />

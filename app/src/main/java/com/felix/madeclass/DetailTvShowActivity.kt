@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
 import com.bumptech.glide.Glide
 import com.felix.madeclass.model.TvShow
@@ -16,10 +17,10 @@ class DetailTvShowActivity : AppCompatActivity() {
         when (item.itemId) {
             android.R.id.home -> {
                 NavUtils.navigateUpFromSameTask(this)
-                return true
             }
             else -> return super.onOptionsItemSelected(item)
         }
+        return true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +32,8 @@ class DetailTvShowActivity : AppCompatActivity() {
         val txtRating: TextView = findViewById(R.id.tvTvRating)
         val txtReleaseDate: TextView = findViewById(R.id.tvTvReleaseDate)
         val imgPoster: ImageView = findViewById(R.id.ivTvPoster)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 

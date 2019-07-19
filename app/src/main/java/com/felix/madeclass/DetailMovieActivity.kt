@@ -1,17 +1,15 @@
 package com.felix.madeclass
 
 
-import android.app.SearchManager
 import android.content.Intent
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
@@ -27,8 +25,8 @@ import java.util.*
 
 class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var movieParcel: Movie
-    lateinit var name: String
+    private lateinit var movieParcel: Movie
+    private lateinit var name: String
 
     override fun onClick(v: View?) {
         when(v?.id){
@@ -61,6 +59,9 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         val ibPlayTrailer: ImageButton = findViewById(R.id.ibPlayTrailer)
         val txtDuration: TextView = findViewById(R.id.tvMovieDuration)
         val shimmerDuration: ShimmerFrameLayout = findViewById(R.id.shimmerMovieDuration)
+        val toolbar:Toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
 
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             if (intent.getParcelableExtra<Movie>(EXTRA_MOVIE) != null) {
@@ -83,18 +84,28 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
                         .thumbnail(
                                 Glide.with(baseContext)
                                         .load(movie.photoBackdropLow)
+                                        .priority(com.bumptech.glide.Priority.HIGH)
                                         .thumbnail(
                                                 Glide.with(baseContext)
                                                         .load(R.drawable.inkling_spinner)
+                                                        .centerCrop()
                                         )
                         )
                         .into(imgBackdrop)
                 Glide.with(baseContext)
                         .load(movie.photoHigh)
                         .fallback(R.drawable.no_image_available)
+
                         .thumbnail(
                                 Glide.with(baseContext)
-                                        .load(R.drawable.inkling_spinner)
+                                        .load(movie.photoLow)
+                                        .priority(com.bumptech.glide.Priority.HIGH)
+                                        .thumbnail(
+                                                Glide.with(baseContext)
+                                                        .load(R.drawable.inkling_spinner)
+
+
+                                        )
                         )
                         .into(imgPoster)
                 txtTitle.text = title

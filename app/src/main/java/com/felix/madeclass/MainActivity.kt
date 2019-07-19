@@ -11,15 +11,16 @@ import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.Fragment
 import io.realm.Realm
 
-
 class MainActivity : AppCompatActivity() {
 
-    lateinit var coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout
+    private lateinit var coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout
     private var doubleBackToExitPressedOnce = false
+    private lateinit var toolbar:Toolbar
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
         lateinit var selectedFragment: Fragment
@@ -73,7 +74,11 @@ class MainActivity : AppCompatActivity() {
 
         Realm.init(this)
 
+
         coordinatorLayout = findViewById(R.id.coordinatorLayout)
+
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         val navigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         navigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)

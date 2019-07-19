@@ -4,7 +4,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -20,9 +19,9 @@ import java.util.ArrayList
 
 class TvFragment : androidx.fragment.app.Fragment() {
 
-    private lateinit var rvTV: androidx.recyclerview.widget.RecyclerView
+    private lateinit var rvTV: RecyclerView
 
-    lateinit var shimmerFrameLayout: ShimmerFrameLayout
+    private lateinit var shimmerFrameLayout: ShimmerFrameLayout
 
     private lateinit var tvViewModel: TvViewModel
     private lateinit var tvAdapter: TvAdapter
@@ -47,7 +46,7 @@ class TvFragment : androidx.fragment.app.Fragment() {
         tvAdapter.notifyDataSetChanged()
 
         rvTV = v.findViewById(R.id.rvTV)
-        rvTV.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireActivity())
+        rvTV.layoutManager = LinearLayoutManager(requireActivity())
         rvTV.adapter = tvAdapter
 
         shimmerFrameLayout = v.findViewById(R.id.shimmer_container)

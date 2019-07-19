@@ -2,7 +2,6 @@ package com.felix.madeclass.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import io.realm.RealmObject
 
 class TvShow() : Parcelable {
     var photoHigh: String? = null
