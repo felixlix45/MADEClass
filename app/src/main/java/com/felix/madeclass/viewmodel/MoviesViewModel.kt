@@ -39,6 +39,7 @@ class MoviesViewModel : ViewModel() {
                                     movie.photoBackdropLow = "https://image.tmdb.org/t/p/w154/" + movieObj.get("backdrop_path").toString()
                                     movie.photoBackdropHigh = "https://image.tmdb.org/t/p/original/" + movieObj.get("backdrop_path").toString()
                                     movie.adult = movieObj.getBoolean("adult")
+
                                     listItem.add(movie)
                                 }
                                 listMovie.postValue(listItem)

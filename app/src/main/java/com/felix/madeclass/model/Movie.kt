@@ -58,4 +58,5 @@ class Movie() : Parcelable {
         }
     }
 
+
 }

@@ -104,93 +104,162 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
+                android:gravity="start"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/roundRectView2">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/heart_icon"
-                    android:paddingTop="2dp"
-                    android:src="@drawable/star_filled_64" />
 
-                <TextView
-                    android:id="@+id/tvMovieRating"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:gravity="end"
-                    android:text="@string/movie_rating"
-                    android:textAlignment="textEnd"
-                    android:textSize="18sp"
-                    android:textStyle="italic" />
+                    android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="25dp"
-                    android:contentDescription="@string/calendar_icon"
-                    android:paddingTop="2dp"
-                    android:src="@drawable/calendar_64" />
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/heart_icon"
+                        android:paddingTop="2dp"
+                        android:src="@drawable/star_filled_64" />
 
-                <TextView
-                    android:id="@+id/tvMovieReleaseDate"
+                    <TextView
+                        android:id="@+id/tvMovieRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:gravity="end"
+                        android:text="@string/movie_rating"
+                        android:textAlignment="textEnd"
+                        android:textSize="18sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/movie_release_date"
-                    android:textSize="18sp"
-                    android:textStyle="italic" />
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:contentDescription="@string/calendar_icon"
+                        android:paddingTop="2dp"
+                        android:src="@drawable/calendar_64" />
+
+                    <TextView
+                        android:id="@+id/tvMovieReleaseDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/movie_release_date"
+                        android:textSize="18sp"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:contentDescription="@string/calendar_icon"
+                        android:paddingTop="2dp"
+                        android:src="@drawable/clock_64" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmerMovieDuration"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:background="@color/colorGray" />
+
+                    <TextView
+                        android:id="@+id/tvMovieDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/movie_duration"
+                        android:textSize="18sp"
+                        android:textStyle="italic"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/clapperboard_64" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmerMovieGenre"
+                        android:layout_width="175dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:background="@color/colorGray" />
+
+                    <TextView
+                        android:id="@+id/tvGenres"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/movie_genres"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvSimilar"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="@string/similar_movies"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="5dp"
-                    android:contentDescription="@string/calendar_icon"
-                    android:paddingTop="2dp"
-                    android:src="@drawable/clock_64" />
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerSimilar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSimilar">
 
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmerMovieDuration"
-                    android:layout_width="100dp"
-                    android:layout_height="10dp"
-                    android:background="@color/colorGray"/>
+                <include layout="@layout/item_movie_shimmer" />
 
-                <TextView
-                    android:id="@+id/tvMovieDuration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/movie_duration"
-                    android:textSize="18sp"
-                    android:visibility="gone"
-                    android:textStyle="italic" />
-            </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSimilarMovie"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSimilar">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/textView"
@@ -203,7 +272,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+                app:layout_constraintTop_toBottomOf="@+id/rvSimilarMovie" />
 
             <TextView
                 android:id="@+id/tvMovieOverview"

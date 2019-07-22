@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         Realm.init(this)
 
+        Toast.makeText(this, applicationContext.toString(), Toast.LENGTH_LONG).show()
 
         coordinatorLayout = findViewById(R.id.coordinatorLayout)
 

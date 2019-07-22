@@ -14,6 +14,8 @@
     <string name="heart_icon">Ikon Hati</string>
     <string name="url_movie">https://api.themoviedb.org/3/discover/movie?api_key=%1$s&amp;language=id-IN&amp;include_adult=true</string>
     <string name="url_movie_detail">https://api.themoviedb.org/3/movie/%1$s?api_key=%2$s&amp;language=id-IN</string>
+    <string name="url_movie_trailer">https://api.themoviedb.org/3/movie/%1$s/videos?api_key=%2$s&amp;language=id-IN</string>
+    <string name="url_movie_similar">https://api.themoviedb.org/3/movie/%1$s/similar?api_key=%2$s&amp;language=id-IN</string>
     <string name="url_tv">https://api.themoviedb.org/3/discover/tv?api_key=%1$s&amp;language=id-IN&amp;include_adult=true</string>
     <string name="favorites">Favorite</string>
     <string name="TvPosterText">Poster Tv</string>
@@ -26,5 +28,7 @@
     <string name="movie_duration">Durasi Film</string>
     <string name="no_duration">- menit</string>
     <string name="release_date">dd MMMM yyyy</string>
+    <string name="movie_genres">Genre Film</string>
+    <string name="similar_movies">Film Yang Mirip</string>
 
 </resources>
