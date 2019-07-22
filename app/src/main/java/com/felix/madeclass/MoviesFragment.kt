@@ -1,10 +1,15 @@
 package com.felix.madeclass
 
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -20,6 +25,7 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
 
     private var rvMovie: androidx.recyclerview.widget.RecyclerView? = null
     private lateinit var shimmerFrameLayout: ShimmerFrameLayout
+    private lateinit var imgNoInternet:ImageView
 
     private lateinit var moviesViewModel: MoviesViewModel
     private lateinit var movieAdapter: MovieAdapter
@@ -29,8 +35,11 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
         val v = inflater.inflate(R.layout.fragment_movies, container, false)
         url = resources.getString(R.string.url_movie, BuildConfig.API_KEY)
 
-        val swipeRefreshLayout = v.findViewById(R.id.swipeContainer) as SwipeRefreshLayout
+        val swipeRefreshLayout: SwipeRefreshLayout = v.findViewById(R.id.swipeContainer)
+        imgNoInternet = v.findViewById(R.id.ivNoInternet)
+        rvMovie = v.findViewById(R.id.rvMovie)
 
+        movieAdapter = MovieAdapter(requireContext())
         moviesViewModel = ViewModelProviders.of(requireActivity()).get(MoviesViewModel::class.java)
         moviesViewModel.getMovies().observe(this, Observer<ArrayList<Movie>> { movieList ->
             if (movieList != null) {
@@ -45,19 +54,25 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
         swipeRefreshLayout.setOnRefreshListener {
             shimmerFrameLayout.visibility = View.VISIBLE
             shimmerFrameLayout.startShimmer()
-            loadData()
-            rvMovie = v.findViewById(R.id.rvMovie)
-            buildRecycleView()
-            swipeContainer.isRefreshing = false
+            if(!isNetworkAvailable()){
+                imgNoInternet.visibility = View.VISIBLE
+                swipeContainer.isRefreshing = false
+                Snackbar.make(activity!!.findViewById(R.id.coordinatorLayout), "Check your internet connection", Snackbar.LENGTH_LONG)
+                        .setAction("Try Again", View.OnClickListener {
+                            loadData()
+                            buildRecycleView()
+                        })
+                        .show()
+            }else {
+                loadData()
+                rvMovie = v.findViewById(R.id.rvMovie)
+                buildRecycleView()
+                swipeContainer.isRefreshing = false
+            }
         }
 
         loadData()
 
-//        moviesViewModel.setMovie(url)
-//        movieAdapter = MovieAdapter(requireContext())
-//        movieAdapter.notifyDataSetChanged()
-
-        rvMovie = v.findViewById(R.id.rvMovie)
         buildRecycleView()
 
         shimmerFrameLayout = v.findViewById(R.id.shimmer_container)
@@ -66,13 +81,30 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun loadData(){
+        if(!isNetworkAvailable()){
+            imgNoInternet.visibility = View.VISIBLE
+            Snackbar.make(activity!!.findViewById(R.id.coordinatorLayout), "Check your internet connection", Snackbar.LENGTH_LONG)
+                    .setAction("Try Again", View.OnClickListener {
+                        loadData()
+                        buildRecycleView()
+                    })
+                    .show()
+        }else{
+            imgNoInternet.visibility = View.GONE
+            moviesViewModel.setMovie(url)
+            movieAdapter = MovieAdapter(requireContext())
+            movieAdapter.notifyDataSetChanged()
+        }
 
-        moviesViewModel.setMovie(url)
-        movieAdapter = MovieAdapter(requireContext())
-        movieAdapter.notifyDataSetChanged()
     }
     private fun buildRecycleView(){
         rvMovie!!.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireActivity())
         rvMovie!!.adapter = movieAdapter
+    }
+
+    private fun isNetworkAvailable(): Boolean{
+        val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
     }
 }

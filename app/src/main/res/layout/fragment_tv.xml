@@ -3,7 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:id="@+id/ivNoInternet"
+        android:contentDescription="@string/no_internet_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/no_internet"
+        android:visibility="visible"
+        android:scaleType="centerCrop"/>
 
 
     <com.facebook.shimmer.ShimmerFrameLayout

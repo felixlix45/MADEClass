@@ -1,6 +1,8 @@
 package com.felix.madeclass
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.provider.Settings
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -12,6 +14,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import androidx.fragment.app.Fragment
 import io.realm.Realm
@@ -74,8 +77,6 @@ class MainActivity : AppCompatActivity() {
 
         Realm.init(this)
 
-        Toast.makeText(this, applicationContext.toString(), Toast.LENGTH_LONG).show()
-
         coordinatorLayout = findViewById(R.id.coordinatorLayout)
 
         toolbar = findViewById(R.id.toolbar)
@@ -89,5 +90,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.commit { replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName) }
         supportActionBar?.title = "Movies"
     }
+
+
 
 }

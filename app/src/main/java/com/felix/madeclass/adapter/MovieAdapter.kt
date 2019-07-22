@@ -15,6 +15,9 @@ import com.felix.madeclass.R
 import com.felix.madeclass.model.Movie
 import java.text.SimpleDateFormat
 import java.util.*
+import android.text.TextUtils
+
+
 
 
 class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
@@ -29,8 +32,15 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-
-        val itemRow = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_movie, viewGroup, false)
+        val currentActivity = this.context.toString()
+        lateinit var itemRow:View
+        if (!TextUtils.isEmpty(currentActivity)) {
+            if (currentActivity.contains("com.felix.madeclass.MainActivity")) {
+                itemRow = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_movie, viewGroup, false)
+            } else  {
+                itemRow = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_movie_similar, viewGroup, false)
+            }
+        }
         return ViewHolder(itemRow)
     }
 

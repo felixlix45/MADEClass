@@ -2,6 +2,7 @@ package com.felix.madeclass
 
 
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -10,7 +11,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.NavUtils
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,13 +26,22 @@ import com.felix.madeclass.viewmodel.MoviesViewModel
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var movieParcel: Movie
+    private lateinit var movie: Movie
     private lateinit var name: String
+    private lateinit var txtGenres:TextView
+    private lateinit var txtDuration: TextView
+
+    private lateinit var ibPlayTrailer: ImageButton
+
+    private lateinit var shimmerDuration: ShimmerFrameLayout
+    private lateinit var shimmerGenres: ShimmerFrameLayout
+    private lateinit var shimmerSimilar: ShimmerFrameLayout
+
     var genre: String = ""
 
 
@@ -59,31 +68,35 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_movie)
 
+        val toolbar:Toolbar = findViewById(R.id.toolbar)
+
         val txtTitle: TextView = findViewById(R.id.tvMovieTitle)
         val txtOverview: TextView = findViewById(R.id.tvMovieOverview)
         val txtRating: TextView = findViewById(R.id.tvMovieRating)
         val txtReleaseDate: TextView = findViewById(R.id.tvMovieReleaseDate)
-        val txtGenres: TextView = findViewById(R.id.tvGenres)
+
         val imgBackdrop: ImageView = findViewById(R.id.ivMovieBackdrop)
         val imgPoster: ImageView = findViewById(R.id.ivMoviePoster)
-        val ibPlayTrailer: ImageButton = findViewById(R.id.ibPlayTrailer)
-        val txtDuration: TextView = findViewById(R.id.tvMovieDuration)
-        val shimmerDuration: ShimmerFrameLayout = findViewById(R.id.shimmerMovieDuration)
-        val shimmerGenres: ShimmerFrameLayout = findViewById(R.id.shimmerMovieGenre)
-        val toolbar:Toolbar = findViewById(R.id.toolbar)
-        val shimmerSimilar: ShimmerFrameLayout = findViewById(R.id.shimmerSimilar)
+
+        ibPlayTrailer = findViewById(R.id.ibPlayTrailer)
+
+        txtGenres = findViewById(R.id.tvGenres)
+        txtDuration = findViewById(R.id.tvMovieDuration)
+        shimmerDuration = findViewById(R.id.shimmerMovieDuration)
+        shimmerGenres = findViewById(R.id.shimmerMovieGenre)
+
+        shimmerSimilar = findViewById(R.id.shimmerSimilar)
 
         setSupportActionBar(toolbar)
         ibPlayTrailer.visibility = View.GONE
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             if (intent.getParcelableExtra<Movie>(EXTRA_MOVIE) != null) {
-                val movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
+                movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
                 movieParcel = movie
                 val title = movie.title
                 val overview = movie.overview
                 val rating = movie.rating
                 var releaseDate = movie.releaseDate
-
 
                 val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
                 val dateFormat = SimpleDateFormat(resources.getString(R.string.release_date), Locale.getDefault())
@@ -133,56 +146,9 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
                 shimmerDuration.visibility = View.VISIBLE
                 shimmerDuration.visibility = View.VISIBLE
 
-                AndroidNetworking.get(resources.getString(R.string.url_movie_detail, movie.movieId.toString() ,BuildConfig.API_KEY))
-                        .setPriority(Priority.HIGH)
-                        .build()
-                        .getAsJSONObject(object: JSONObjectRequestListener{
-                            override fun onResponse(response: JSONObject) {
-                                val duration = response.get("runtime").toString() + " minutes"
-                                if(!response.isNull("runtime")){
-                                    txtDuration.text = duration
-                                }else{
-                                    txtDuration.text = resources.getString(R.string.no_duration)
-                                }
-                                val genres = response.getJSONArray("genres")
+                getMoreDetail()
 
-                                for(j in 0 until genres.length()){
-                                    if(j == genres.length()-1){
-                                        genre += genres.getJSONObject(j).get("name").toString()
-                                    }else{
-                                        genre += genres.getJSONObject(j).get("name").toString() + " | "
-                                    }
-                                }
-                                txtGenres.text = genre
-                                shimmerDuration.stopShimmer()
-                                shimmerGenres.stopShimmer()
-                                shimmerDuration.visibility = View.GONE
-                                shimmerGenres.visibility = View.GONE
-                                txtDuration.visibility = View.VISIBLE
-                                txtGenres.visibility = View.VISIBLE
-                            }
 
-                            override fun onError(anError: ANError?) {
-                                txtDuration.text = resources.getString(R.string.no_duration)
-                            }
-                        })
-
-                AndroidNetworking.get(resources.getString(R.string.url_movie_trailer, movie.movieId.toString(), BuildConfig.API_KEY))
-                        .setPriority(Priority.HIGH)
-                        .build()
-                        .getAsJSONObject(object: JSONObjectRequestListener{
-                            override fun onResponse(response: JSONObject) {
-                                val jArray = response.getJSONArray("results")
-                                if(!jArray.isNull(0)){
-                                    name = jArray.getJSONObject(0)?.get("key").toString()
-                                    ibPlayTrailer.visibility = View.VISIBLE
-                                }
-                            }
-
-                            override fun onError(anError: ANError?) {
-                                ibPlayTrailer.visibility = View.GONE
-                            }
-                        })
 
                 ibPlayTrailer.setOnClickListener(this)
 
@@ -216,10 +182,63 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
         super.onSaveInstanceState(outState, outPersistentState)
-        outState?.putParcelable("movie", movieParcel)
+//        outState?.putParcelable("movie", movieParcel)
     }
 
     companion object {
         private const val EXTRA_MOVIE = "extra_movie"
+    }
+
+    private fun getMoreDetail(){
+        AndroidNetworking.get(resources.getString(R.string.url_movie_detail, movie.movieId.toString() ,BuildConfig.API_KEY))
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(object: JSONObjectRequestListener{
+                    override fun onResponse(response: JSONObject) {
+                        val duration = response.get("runtime").toString() + " minutes"
+                        if(!response.isNull("runtime")){
+                            txtDuration.text = duration
+                        }else{
+                            txtDuration.text = resources.getString(R.string.no_duration)
+                        }
+                        val genres = response.getJSONArray("genres")
+
+                        for(j in 0 until genres.length()){
+                            if(j == genres.length()-1){
+                                genre += genres.getJSONObject(j).get("name").toString()
+                            }else{
+                                genre += genres.getJSONObject(j).get("name").toString() + " | "
+                            }
+                        }
+                        txtGenres.text = genre
+                        shimmerDuration.stopShimmer()
+                        shimmerGenres.stopShimmer()
+                        shimmerDuration.visibility = View.GONE
+                        shimmerGenres.visibility = View.GONE
+                        txtDuration.visibility = View.VISIBLE
+                        txtGenres.visibility = View.VISIBLE
+                    }
+
+                    override fun onError(anError: ANError?) {
+                        txtDuration.text = resources.getString(R.string.no_duration)
+                    }
+                })
+
+        AndroidNetworking.get(resources.getString(R.string.url_movie_trailer, movie.movieId.toString(), BuildConfig.API_KEY))
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(object: JSONObjectRequestListener{
+                    override fun onResponse(response: JSONObject) {
+                        val jArray = response.getJSONArray("results")
+                        if(!jArray.isNull(0)){
+                            name = jArray.getJSONObject(0)?.get("key").toString()
+                            ibPlayTrailer.visibility = View.VISIBLE
+                        }
+                    }
+
+                    override fun onError(anError: ANError?) {
+                        ibPlayTrailer.visibility = View.GONE
+                    }
+                })
     }
 }
