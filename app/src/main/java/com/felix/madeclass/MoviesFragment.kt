@@ -2,16 +2,17 @@ package com.felix.madeclass
 
 
 import android.content.Context
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.felix.madeclass.adapter.MovieAdapter
@@ -98,7 +99,13 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
 
     }
     private fun buildRecycleView(){
-        rvMovie!!.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireActivity())
+        val orientation: Int = resources.configuration.orientation
+        if(orientation == Configuration.ORIENTATION_PORTRAIT){
+            rvMovie!!.layoutManager = LinearLayoutManager(requireActivity())
+        }else{
+            rvMovie!!.layoutManager = GridLayoutManager(requireActivity(),2)
+        }
+
         rvMovie!!.adapter = movieAdapter
     }
 

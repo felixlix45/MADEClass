@@ -13,8 +13,8 @@
     <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rounded_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/roundRectView3"
@@ -35,7 +35,7 @@
 
         <ImageView
             android:id="@+id/ivMoviePoster"
-            android:layout_width="match_parent"
+            android:layout_width="108dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/MoviePosterText"
             android:scaleType="centerCrop"
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:orientation="vertical"
         android:paddingStart="0dp"
         android:paddingEnd="127dp"
@@ -118,15 +118,15 @@
 
             <ImageView
                 android:id="@+id/ivMature"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
                 android:contentDescription="@string/mature_icon"
                 android:src="@drawable/mature" />
 
             <ImageView
                 android:id="@+id/ivParentalGuidance"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
                 android:contentDescription="@string/parental_guidance_icon"
                 android:src="@drawable/parental_guidance" />
 

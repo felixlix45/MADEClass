@@ -2,11 +2,8 @@ package com.felix.madeclass
 
 
 import android.content.Intent
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -94,7 +91,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         ibPlayTrailer.visibility = View.GONE
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             if (intent.getParcelableExtra<Movie>(EXTRA_MOVIE) != null) {
-                movie = intent.getParcelableExtra<Movie>(EXTRA_MOVIE)
+                movie = intent.getParcelableExtra(EXTRA_MOVIE)
                 movieParcel = movie
                 val title = movie.title
                 val overview = movie.overview
@@ -182,12 +179,6 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-
-
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState)
-//        outState?.putParcelable("movie", movieParcel)
-    }
 
     companion object {
         private const val EXTRA_MOVIE = "extra_movie"
