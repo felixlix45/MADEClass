@@ -17,7 +17,11 @@ class FavoritesFragment : androidx.fragment.app.Fragment() {
 
         val viewPager: ViewPager = v.findViewById(R.id.view_pager)
         val adapter = ViewPageAdapter(childFragmentManager)
-        //val imgNoInternet:ImageView = v.findViewById(R.id.ivNoInternet)
+        val imgNoInternet:ImageView = v.findViewById(R.id.ivNoInternet)
+
+        if(isNetworkAvailable()){
+            imgNoInternet.visibility = View.GONE
+        }
 
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = adapter.count - 1

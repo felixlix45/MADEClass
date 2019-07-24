@@ -48,9 +48,13 @@ class DetailTvShowActivity : AppCompatActivity() {
             txtOverview.text = overview
             txtRating.text = rating
             txtReleaseDate.text = releaseDate
+
             Glide.with(baseContext)
                     .load(tvShow.photoHigh)
-                    .fallback(R.drawable.no_image_available)
+                    .error(
+                            Glide.with(baseContext)
+                                    .load(R.drawable.no_image_available)
+                    )
                     .thumbnail(
                             Glide.with(baseContext)
                                     .load(tvShow.photoLow)

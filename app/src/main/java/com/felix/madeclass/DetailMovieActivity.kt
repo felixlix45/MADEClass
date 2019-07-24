@@ -105,11 +105,18 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
                 Glide.with(baseContext)
                         .load(movie.photoBackdropHigh)
-                        .fallback(R.drawable.no_image_available)
+                        .error(
+                                Glide.with(baseContext)
+                                        .load(R.drawable.no_image_available)
+                        )
                         .priority(com.bumptech.glide.Priority.IMMEDIATE)
                         .thumbnail(
                                 Glide.with(baseContext)
                                         .load(movie.photoBackdropLow)
+                                        .error(
+                                                Glide.with(baseContext)
+                                                        .load(R.drawable.no_image_available)
+                                        )
                                         .priority(com.bumptech.glide.Priority.HIGH)
                                         .thumbnail(
                                                 Glide.with(baseContext)

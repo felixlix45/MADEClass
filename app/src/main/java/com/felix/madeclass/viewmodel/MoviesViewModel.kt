@@ -36,8 +36,14 @@ class MoviesViewModel : ViewModel() {
                                     movie.photoLow = "https://image.tmdb.org/t/p/w154/" + movieObj.get("poster_path").toString()
                                     movie.rating = movieObj.get("vote_average").toString()
                                     movie.releaseDate = movieObj.get("release_date").toString()
-                                    movie.photoBackdropLow = "https://image.tmdb.org/t/p/w154/" + movieObj.get("backdrop_path").toString()
-                                    movie.photoBackdropHigh = "https://image.tmdb.org/t/p/original/" + movieObj.get("backdrop_path").toString()
+                                    if(movieObj.isNull("backdrop_path")){
+                                        movie.photoBackdropLow = "https://image.tmdb.org/t/p/w154/"
+                                        movie.photoBackdropHigh = "https://image.tmdb.org/t/p/original/"
+                                    }else{
+                                        movie.photoBackdropLow = "https://image.tmdb.org/t/p/w154/" + movieObj.get("backdrop_path").toString()
+                                        movie.photoBackdropHigh = "https://image.tmdb.org/t/p/original/" + movieObj.get("backdrop_path").toString()
+                                    }
+
                                     movie.adult = movieObj.getBoolean("adult")
 
                                     listItem.add(movie)
