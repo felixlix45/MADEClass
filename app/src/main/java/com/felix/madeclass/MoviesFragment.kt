@@ -42,7 +42,7 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
         movieAdapter = MovieAdapter(requireContext())
         moviesViewModel = ViewModelProviders.of(requireActivity()).get(MoviesViewModel::class.java)
         moviesViewModel.getMovies().observe(this, Observer<ArrayList<Movie>> { movieList ->
-            if (movieList != null) {
+            if (movieList.isNotEmpty()) {
                 movieAdapter.setData(movieList)
                 shimmerFrameLayout.stopShimmer()
                 shimmerFrameLayout.visibility = View.GONE

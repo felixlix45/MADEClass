@@ -40,7 +40,7 @@ class TvFragment : androidx.fragment.app.Fragment() {
 
         tvViewModel = ViewModelProviders.of(requireActivity()).get(TvViewModel::class.java)
         tvViewModel.getTvs().observe(this, Observer<ArrayList<TvShow>>{tvList ->
-            if(tvList!=null){
+            if(tvList.isNotEmpty()){
                 tvAdapter.setData(tvList)
                 shimmerFrameLayout.stopShimmer()
                 shimmerFrameLayout.visibility = View.GONE

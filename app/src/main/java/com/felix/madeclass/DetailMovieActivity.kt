@@ -6,6 +6,7 @@ import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -35,6 +36,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var name: String
     private lateinit var txtGenres:TextView
     private lateinit var txtDuration: TextView
+
 
     private lateinit var ibPlayTrailer: ImageButton
 
@@ -74,6 +76,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         val txtOverview: TextView = findViewById(R.id.tvMovieOverview)
         val txtRating: TextView = findViewById(R.id.tvMovieRating)
         val txtReleaseDate: TextView = findViewById(R.id.tvMovieReleaseDate)
+        val txtNoSimilarMovie: TextView = findViewById(R.id.tvNoSimilarMovie)
 
         val imgBackdrop: ImageView = findViewById(R.id.ivMovieBackdrop)
         val imgPoster: ImageView = findViewById(R.id.ivMoviePoster)
@@ -158,12 +161,13 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
                 val rvSimilarMovie: RecyclerView = findViewById(R.id.rvSimilarMovie)
                 val moviesViewModel: MoviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
                 moviesViewModel.getMovies().observe(this, androidx.lifecycle.Observer { movieList ->
-                    if(movieList!= null){
+                    if(movieList.isNotEmpty()){
                         movieAdapter.setData(movieList)
-                        shimmerSimilar.visibility = View.GONE
                     }else{
-                        Toast.makeText(this, "No Data Available", Toast.LENGTH_SHORT).show()
+                        txtNoSimilarMovie.visibility = View.VISIBLE
+                        rvSimilarMovie.visibility = View.GONE
                     }
+                    shimmerSimilar.visibility = View.GONE
                 })
                 moviesViewModel.setMovie(resources.getString(R.string.url_movie_similar, movie.movieId, BuildConfig.API_KEY))
                 movieAdapter.notifyDataSetChanged()
