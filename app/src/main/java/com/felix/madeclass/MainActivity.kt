@@ -31,15 +31,15 @@ class MainActivity : AppCompatActivity() {
         when (menuItem.itemId) {
             R.id.title_movies -> {
                 selectedFragment = MoviesFragment()
-                supportActionBar?.title = "Movies"
+                supportActionBar?.title = resources.getString(R.string.title_movies)
             }
             R.id.title_tv_show -> {
                 selectedFragment = TvFragment()
-                supportActionBar?.title = "TV Show"
+                supportActionBar?.title = resources.getString(R.string.title_tv_show)
             }
             R.id.title_favorites ->{
                 selectedFragment = FavoritesFragment()
-                supportActionBar?.title = "Favorites"
+                supportActionBar?.title = resources.getString(R.string.favorites)
             }
         }
         supportFragmentManager.commit { replace(R.id.fragment_container, selectedFragment, selectedFragment.javaClass.simpleName) }

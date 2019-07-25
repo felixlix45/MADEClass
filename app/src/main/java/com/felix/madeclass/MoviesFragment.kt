@@ -98,6 +98,7 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
         }
 
     }
+
     private fun buildRecycleView(){
         val orientation: Int = resources.configuration.orientation
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
