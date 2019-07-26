@@ -1,9 +1,12 @@
 package com.felix.madeclass
 
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -20,6 +23,8 @@ import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.felix.madeclass.adapter.MovieAdapter
 import com.felix.madeclass.model.Movie
+import com.felix.madeclass.model.MovieFavorite
+import com.felix.madeclass.viewmodel.FavoriteMoviesViewModel
 import com.felix.madeclass.viewmodel.MoviesViewModel
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -53,14 +58,43 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> {
+            android.R.id.home ->{
                 onBackPressed()
+                return true
+            }
+            R.id.menuFavorite ->{
+                Toast.makeText(applicationContext, "Tapped", Toast.LENGTH_LONG).show()
+                saveMovies()
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun saveMovies(){
+        val movieFavorite = MovieFavorite()
+
+        movieFavorite.movieId = movie.movieId
+        movieFavorite.photoHigh = movie.photoHigh
+        movieFavorite.photoLow = movie.photoLow
+        movieFavorite.photoBackdropHigh = movie.photoBackdropHigh
+        movieFavorite.photoBackdropLow = movie.photoBackdropLow
+        movieFavorite.title = movie.title
+        movieFavorite.releaseDate = movie.releaseDate
+        movieFavorite.rating = movie.rating
+        movieFavorite.overview = movie.overview
+        movieFavorite.adult = movie.adult
+        Log.e("Detail", movieFavorite.toString())
+        val favoriteMoviesViewModel = FavoriteMoviesViewModel(application)
+        favoriteMoviesViewModel.insert(movieFavorite)
+        Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,6 +127,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
             if (intent.getParcelableExtra<Movie>(EXTRA_MOVIE) != null) {
                 movie = intent.getParcelableExtra(EXTRA_MOVIE)
                 movieParcel = movie
+
                 val title = movie.title
                 val overview = movie.overview
                 val rating = movie.rating
@@ -161,7 +196,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
 
                 //Similar Movies
-                val movieAdapter = MovieAdapter(baseContext)
+                val movieAdapter = MovieAdapter(this)
                 val rvSimilarMovie: RecyclerView = findViewById(R.id.rvSimilarMovie)
                 val moviesViewModel: MoviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
                 moviesViewModel.getMovies().observe(this, androidx.lifecycle.Observer { movieList ->
@@ -189,6 +224,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         private const val EXTRA_MOVIE = "extra_movie"
+
     }
 
     private fun getMoreDetail(){

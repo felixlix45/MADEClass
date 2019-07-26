@@ -12,23 +12,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.felix.madeclass.DetailMovieActivity
 import com.felix.madeclass.R
-import com.felix.madeclass.model.Movie
+import com.felix.madeclass.model.MovieFavorite
 import java.text.SimpleDateFormat
 import java.util.*
 import android.text.TextUtils
-import android.util.Log
-import com.felix.madeclass.model.MovieFavorite
 import kotlin.collections.ArrayList
 
 
-class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class FavoriteMovieAdapter(var context: Context) : RecyclerView.Adapter<FavoriteMovieAdapter.ViewHolder>() {
 
 
-    private var listMovie = ArrayList<Movie>()
+    private var listMovie:List<MovieFavorite> = ArrayList()
 
-    fun setData(movies: ArrayList<Movie>) {
-        listMovie.clear()
-        listMovie.addAll(movies)
+    fun setData(movies: List<MovieFavorite>) {
+        this.listMovie = movies
         notifyDataSetChanged()
     }
 
@@ -49,7 +46,7 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
         viewHolder.bind(listMovie[i])
 
         viewHolder.constraintLayout.setOnClickListener { v ->
-            val movie = Movie()
+            val movie = MovieFavorite()
 
             movie.movieId = listMovie[viewHolder.adapterPosition].movieId
             movie.title = listMovie[viewHolder.adapterPosition].title
@@ -62,9 +59,9 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
             movie.photoBackdropLow = listMovie[viewHolder.adapterPosition].photoBackdropLow
             movie.adult = listMovie[viewHolder.adapterPosition].adult
 
-            val toDetail = Intent(v.context, DetailMovieActivity::class.java)
-            toDetail.putExtra("extra_movie", movie)
-            v.context.startActivity(toDetail)
+//            val toDetail = Intent(v.context, DetailMovieActivity::class.java)
+//            toDetail.putExtra("extra_movie", movie)
+//            v.context.startActivity(toDetail)
         }
     }
 
@@ -84,7 +81,7 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
         internal val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.lvParentMovie)
 
 
-        fun bind(movie: Movie) {
+        fun bind(movie: MovieFavorite) {
             txtTitle.text = movie.title
             txtRating.text = movie.rating
             val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)

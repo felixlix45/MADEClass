@@ -27,11 +27,12 @@
     <string name="mature_icon">Mature Icon</string>
     <string name="movie_duration">Movie Duration</string>
     <string name="no_duration">- minutes</string>
-    <string name="release_date">MMMM dd, yyyy</string>
+    <string name="release_date">MMMM d, yyyy</string>
     <string name="movie_genres">Movie Genres</string>
     <string name="similar_movies">Similar Movies</string>
     <string name="no_internet_image">No Internet Image</string>
     <string name="no_similar_movie">No Similar Movie At The Moment</string>
+    <string name="add_to_favorite">Add to Favorite</string>
 
 
 </resources>

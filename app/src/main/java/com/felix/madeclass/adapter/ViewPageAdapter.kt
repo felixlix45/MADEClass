@@ -3,6 +3,8 @@ package com.felix.madeclass.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.felix.madeclass.FavMoviesFragment
+import com.felix.madeclass.FavTvFragment
 import com.felix.madeclass.MoviesFragment
 import com.felix.madeclass.TvFragment
 
@@ -11,10 +13,10 @@ class ViewPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         lateinit var selectedFragment: Fragment
         when(position){
             0 -> {
-                selectedFragment = MoviesFragment()
+                selectedFragment = FavMoviesFragment()
             }
             1 ->{
-                selectedFragment =  TvFragment()
+                selectedFragment = FavTvFragment()
             }
         }
         return selectedFragment

@@ -27,7 +27,7 @@
     <string name="mature_icon">Mature Icon</string>
     <string name="movie_duration">Durasi Film</string>
     <string name="no_duration">- menit</string>
-    <string name="release_date">dd MMMM yyyy</string>
+    <string name="release_date">d MMMM yyyy</string>
     <string name="movie_genres">Genre Film</string>
     <string name="similar_movies">Film Yang Mirip</string>
     <string name="no_internet_image">Tidak ada foto</string>
