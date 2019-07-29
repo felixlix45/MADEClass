@@ -1,8 +1,6 @@
 package com.felix.madeclass
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.provider.Settings
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -14,7 +12,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.commit
 import androidx.fragment.app.Fragment
 import io.realm.Realm
@@ -23,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout
     private var doubleBackToExitPressedOnce = false
-    private lateinit var toolbar:Toolbar
+    private lateinit var toolbar: Toolbar
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
         lateinit var selectedFragment: Fragment
@@ -37,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 selectedFragment = TvFragment()
                 supportActionBar?.title = resources.getString(R.string.title_tv_show)
             }
-            R.id.title_favorites ->{
+            R.id.title_favorites -> {
                 selectedFragment = FavoritesFragment()
                 supportActionBar?.title = resources.getString(R.string.favorites)
             }
@@ -47,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(doubleBackToExitPressedOnce){
+        if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
             return
         }
@@ -55,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         this.doubleBackToExitPressedOnce = true
         Toast.makeText(this, "Press back again to leave", Toast.LENGTH_SHORT).show()
 
-        Handler().postDelayed( { doubleBackToExitPressedOnce = false }, 2000)
+        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -90,7 +87,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.commit { replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName) }
         supportActionBar?.title = "Movies"
     }
-
 
 
 }

@@ -36,7 +36,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var movieParcel: Movie
     private lateinit var movie: Movie
     private lateinit var name: String
-    private lateinit var txtGenres:TextView
+    private lateinit var txtGenres: TextView
     private lateinit var txtDuration: TextView
 
 
@@ -50,7 +50,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.ibPlayTrailer -> {
                 val toYT = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=$name"))
                 v.context.startActivity(toYT)
@@ -65,11 +65,11 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home ->{
+            android.R.id.home -> {
                 onBackPressed()
                 return true
             }
-            R.id.menuFavorite ->{
+            R.id.menuFavorite -> {
                 Toast.makeText(applicationContext, "Tapped", Toast.LENGTH_LONG).show()
                 saveMovies()
                 return true
@@ -78,7 +78,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun saveMovies(){
+    private fun saveMovies() {
         val movieFavorite = MovieFavorite()
 
         movieFavorite.movieId = movie.movieId
@@ -91,7 +91,6 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         movieFavorite.rating = movie.rating
         movieFavorite.overview = movie.overview
         movieFavorite.adult = movie.adult
-        Log.e("Detail", movieFavorite.toString())
         val favoriteMoviesViewModel = FavoriteMoviesViewModel(application)
         favoriteMoviesViewModel.insert(movieFavorite)
         Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT).show()
@@ -101,7 +100,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_movie)
 
-        val toolbar:Toolbar = findViewById(R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
 
         val txtTitle: TextView = findViewById(R.id.tvMovieTitle)
         val txtOverview: TextView = findViewById(R.id.tvMovieOverview)
@@ -124,100 +123,97 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         setSupportActionBar(toolbar)
         ibPlayTrailer.visibility = View.GONE
         if (supportActionBar != null) supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            if (intent.getParcelableExtra<Movie>(EXTRA_MOVIE) != null) {
-                movie = intent.getParcelableExtra(EXTRA_MOVIE)
-                movieParcel = movie
+        if (intent.getParcelableExtra<Movie>(EXTRA_MOVIE) != null) {
+            movie = intent.getParcelableExtra(EXTRA_MOVIE)
+            movieParcel = movie
 
-                val title = movie.title
-                val overview = movie.overview
-                val rating = movie.rating
-                var releaseDate = movie.releaseDate
+            val title = movie.title
+            val overview = movie.overview
+            val rating = movie.rating
+            var releaseDate = movie.releaseDate
 
-                val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-                val dateFormat = SimpleDateFormat(resources.getString(R.string.release_date), Locale.getDefault())
-                val date: Date = formatter.parse(releaseDate)
-                releaseDate = dateFormat.format(date).toString()
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+            val dateFormat = SimpleDateFormat(resources.getString(R.string.release_date), Locale.getDefault())
+            val date: Date = formatter.parse(releaseDate)
+            releaseDate = dateFormat.format(date).toString()
 
-                Glide.with(baseContext)
-                        .load(movie.photoBackdropHigh)
-                        .error(
-                                Glide.with(baseContext)
-                                        .load(R.drawable.no_image_available)
-                        )
-                        .priority(com.bumptech.glide.Priority.IMMEDIATE)
-                        .thumbnail(
-                                Glide.with(baseContext)
-                                        .load(movie.photoBackdropLow)
-                                        .error(
-                                                Glide.with(baseContext)
-                                                        .load(R.drawable.no_image_available)
-                                        )
-                                        .priority(com.bumptech.glide.Priority.HIGH)
-                                        .thumbnail(
-                                                Glide.with(baseContext)
-                                                        .load(R.drawable.inkling_spinner)
-                                                        .centerCrop()
-                                        )
-                        )
-                        .into(imgBackdrop)
-                Glide.with(baseContext)
-                        .load(movie.photoHigh)
-                        .fallback(R.drawable.no_image_available)
+            Glide.with(baseContext)
+                    .load(movie.photoBackdropHigh)
+                    .error(
+                            Glide.with(baseContext)
+                                    .load(R.drawable.no_image_available)
+                    )
+                    .priority(com.bumptech.glide.Priority.IMMEDIATE)
+                    .thumbnail(
+                            Glide.with(baseContext)
+                                    .load(movie.photoBackdropLow)
+                                    .error(
+                                            Glide.with(baseContext)
+                                                    .load(R.drawable.no_image_available)
+                                    )
+                                    .priority(com.bumptech.glide.Priority.HIGH)
+                                    .thumbnail(
+                                            Glide.with(baseContext)
+                                                    .load(R.drawable.inkling_spinner)
+                                                    .centerCrop()
+                                    )
+                    )
+                    .into(imgBackdrop)
+            Glide.with(baseContext)
+                    .load(movie.photoHigh)
+                    .fallback(R.drawable.no_image_available)
 
-                        .thumbnail(
-                                Glide.with(baseContext)
-                                        .load(movie.photoLow)
-                                        .priority(com.bumptech.glide.Priority.HIGH)
-                                        .thumbnail(
-                                                Glide.with(baseContext)
-                                                        .load(R.drawable.inkling_spinner)
-
-
-                                        )
-                        )
-                        .into(imgPoster)
-                txtTitle.text = title
-                txtOverview.text = overview
-                txtRating.text = rating
-                txtReleaseDate.text = releaseDate
+                    .thumbnail(
+                            Glide.with(baseContext)
+                                    .load(movie.photoLow)
+                                    .priority(com.bumptech.glide.Priority.HIGH)
+                                    .thumbnail(
+                                            Glide.with(baseContext)
+                                                    .load(R.drawable.inkling_spinner)
 
 
-
-                shimmerDuration.startShimmer()
-                shimmerGenres.startShimmer()
-                shimmerDuration.visibility = View.VISIBLE
-                shimmerDuration.visibility = View.VISIBLE
-
-                getMoreDetail()
+                                    )
+                    )
+                    .into(imgPoster)
+            txtTitle.text = title
+            txtOverview.text = overview
+            txtRating.text = rating
+            txtReleaseDate.text = releaseDate
 
 
 
-                ibPlayTrailer.setOnClickListener(this)
+            shimmerDuration.startShimmer()
+            shimmerGenres.startShimmer()
+            shimmerDuration.visibility = View.VISIBLE
+            shimmerDuration.visibility = View.VISIBLE
 
+            getMoreDetail()
 
-                //Similar Movies
-                val movieAdapter = MovieAdapter(this)
-                val rvSimilarMovie: RecyclerView = findViewById(R.id.rvSimilarMovie)
-                val moviesViewModel: MoviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
-                moviesViewModel.getMovies().observe(this, androidx.lifecycle.Observer { movieList ->
-                    if(movieList.isNotEmpty()){
-                        movieAdapter.setData(movieList)
-                    }else{
-                        txtNoSimilarMovie.visibility = View.VISIBLE
-                        rvSimilarMovie.visibility = View.GONE
-                    }
-                    shimmerSimilar.visibility = View.GONE
-                })
-                moviesViewModel.setMovie(resources.getString(R.string.url_movie_similar, movie.movieId, BuildConfig.API_KEY))
-                movieAdapter.notifyDataSetChanged()
+            ibPlayTrailer.setOnClickListener(this)
 
-                rvSimilarMovie.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-                rvSimilarMovie.adapter = movieAdapter
+            //Similar Movies
+            val movieAdapter = MovieAdapter(this)
+            val rvSimilarMovie: RecyclerView = findViewById(R.id.rvSimilarMovie)
+            val moviesViewModel: MoviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
+            moviesViewModel.getMovies().observe(this, androidx.lifecycle.Observer { movieList ->
+                if (movieList.isNotEmpty()) {
+                    movieAdapter.setData(movieList)
+                } else {
+                    txtNoSimilarMovie.visibility = View.VISIBLE
+                    rvSimilarMovie.visibility = View.GONE
+                }
+                shimmerSimilar.visibility = View.GONE
+            })
+            moviesViewModel.setMovie(resources.getString(R.string.url_movie_similar, movie.movieId, BuildConfig.API_KEY))
+            movieAdapter.notifyDataSetChanged()
 
-                supportActionBar?.title = title
-            } else {
-                Toast.makeText(baseContext, "Err... Something went wrong", Toast.LENGTH_SHORT).show()
-            }
+            rvSimilarMovie.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            rvSimilarMovie.adapter = movieAdapter
+
+            supportActionBar?.title = title
+        } else {
+            Toast.makeText(baseContext, "Err... Something went wrong", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
@@ -227,24 +223,24 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun getMoreDetail(){
-        AndroidNetworking.get(resources.getString(R.string.url_movie_detail, movie.movieId.toString() ,BuildConfig.API_KEY))
+    private fun getMoreDetail() {
+        AndroidNetworking.get(resources.getString(R.string.url_movie_detail, movie.movieId.toString(), BuildConfig.API_KEY))
                 .setPriority(Priority.HIGH)
                 .build()
-                .getAsJSONObject(object: JSONObjectRequestListener{
+                .getAsJSONObject(object : JSONObjectRequestListener {
                     override fun onResponse(response: JSONObject) {
                         val duration = response.get("runtime").toString() + " minutes"
-                        if(!response.isNull("runtime")){
+                        if (!response.isNull("runtime")) {
                             txtDuration.text = duration
-                        }else{
+                        } else {
                             txtDuration.text = resources.getString(R.string.no_duration)
                         }
                         val genres = response.getJSONArray("genres")
 
-                        for(j in 0 until genres.length()){
-                            if(j == genres.length()-1){
+                        for (j in 0 until genres.length()) {
+                            if (j == genres.length() - 1) {
                                 genre += genres.getJSONObject(j).get("name").toString()
-                            }else{
+                            } else {
                                 genre += genres.getJSONObject(j).get("name").toString() + " | "
                             }
                         }
@@ -265,10 +261,10 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         AndroidNetworking.get(resources.getString(R.string.url_movie_trailer, movie.movieId.toString(), BuildConfig.API_KEY))
                 .setPriority(Priority.HIGH)
                 .build()
-                .getAsJSONObject(object: JSONObjectRequestListener{
+                .getAsJSONObject(object : JSONObjectRequestListener {
                     override fun onResponse(response: JSONObject) {
                         val jArray = response.getJSONArray("results")
-                        if(!jArray.isNull(0)){
+                        if (!jArray.isNull(0)) {
                             name = jArray.getJSONObject(0)?.get("key").toString()
                             ibPlayTrailer.visibility = View.VISIBLE
                         }

@@ -17,11 +17,6 @@ class FavoritesFragment : androidx.fragment.app.Fragment() {
 
         val viewPager: ViewPager = v.findViewById(R.id.view_pager)
         val adapter = ViewPageAdapter(childFragmentManager)
-        val imgNoInternet:ImageView = v.findViewById(R.id.ivNoInternet)
-
-        if(isNetworkAvailable()){
-            imgNoInternet.visibility = View.GONE
-        }
 
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = adapter.count - 1
@@ -32,7 +27,7 @@ class FavoritesFragment : androidx.fragment.app.Fragment() {
         return v
     }
 
-    private fun isNetworkAvailable(): Boolean{
+    private fun isNetworkAvailable(): Boolean {
         val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected

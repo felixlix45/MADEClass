@@ -25,7 +25,6 @@ class TvFragment : androidx.fragment.app.Fragment() {
     private lateinit var rvTV: RecyclerView
 
     private lateinit var shimmerFrameLayout: ShimmerFrameLayout
-    private lateinit var imgNoInternet:ImageView
 
     private lateinit var tvViewModel: TvViewModel
     private lateinit var tvAdapter: TvAdapter
@@ -33,18 +32,16 @@ class TvFragment : androidx.fragment.app.Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_tv, container, false)
 
-        imgNoInternet = v.findViewById(R.id.ivNoInternet)
-
         rvTV = v.findViewById(R.id.rvTV)
         tvAdapter = TvAdapter(requireActivity())
 
         tvViewModel = ViewModelProviders.of(requireActivity()).get(TvViewModel::class.java)
-        tvViewModel.getTvs().observe(this, Observer<ArrayList<TvShow>>{tvList ->
-            if(tvList.isNotEmpty()){
+        tvViewModel.getTvs().observe(this, Observer<ArrayList<TvShow>> { tvList ->
+            if (tvList.isNotEmpty()) {
                 tvAdapter.setData(tvList)
                 shimmerFrameLayout.stopShimmer()
                 shimmerFrameLayout.visibility = View.GONE
-            }else{
+            } else {
                 Snackbar.make(activity!!.findViewById(R.id.coordinatorLayout), "No Data Available", Snackbar.LENGTH_SHORT).show()
             }
         })
@@ -57,31 +54,24 @@ class TvFragment : androidx.fragment.app.Fragment() {
         return v
     }
 
-    private fun isNetworkAvailable(): Boolean{
+    private fun isNetworkAvailable(): Boolean {
         val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
     }
 
-    private fun loadData(){
+    private fun loadData() {
 
-        if(!isNetworkAvailable()){
-            imgNoInternet.visibility = View.VISIBLE
-            Snackbar.make(activity!!.findViewById(R.id.coordinatorLayout), "Check your internet connection", Snackbar.LENGTH_LONG)
-                    .setAction("Try Again", View.OnClickListener {
-                        loadData()
-                        buildRecyclerView()
-                    })
-                    .show()
-        }else{
-            imgNoInternet.visibility = View.GONE
+        if (!isNetworkAvailable()) {
+            Snackbar.make(activity!!.findViewById(R.id.coordinatorLayout), "Check your internet connection", Snackbar.LENGTH_LONG).show()
+        } else {
             tvViewModel.setTv(resources.getString(R.string.url_tv, BuildConfig.API_KEY))
             tvAdapter.notifyDataSetChanged()
         }
 
     }
 
-    private fun buildRecyclerView(){
+    private fun buildRecyclerView() {
         rvTV.layoutManager = LinearLayoutManager(requireActivity())
         rvTV.adapter = tvAdapter
     }

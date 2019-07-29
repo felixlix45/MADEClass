@@ -15,14 +15,6 @@
         app:tabSelectedTextColor="#000000"
         app:tabTextColor="#000000"/>
 
-    <ImageView
-        android:id="@+id/ivNoInternet"
-        android:contentDescription="@string/no_internet_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/no_internet"
-        android:visibility="visible"
-        android:scaleType="centerCrop"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"

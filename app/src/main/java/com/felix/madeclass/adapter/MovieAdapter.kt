@@ -16,8 +16,6 @@ import com.felix.madeclass.model.Movie
 import java.text.SimpleDateFormat
 import java.util.*
 import android.text.TextUtils
-import android.util.Log
-import com.felix.madeclass.model.MovieFavorite
 import kotlin.collections.ArrayList
 
 

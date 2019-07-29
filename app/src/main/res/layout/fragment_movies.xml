@@ -15,14 +15,6 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <ImageView
-            android:id="@+id/ivNoInternet"
-            android:contentDescription="@string/no_internet_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/no_internet"
-            android:scaleType="centerCrop"/>
-
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_container"
             android:layout_width="match_parent"
