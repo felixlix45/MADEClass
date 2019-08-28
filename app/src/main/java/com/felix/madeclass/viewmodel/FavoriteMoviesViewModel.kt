@@ -11,31 +11,29 @@ class FavoriteMoviesViewModel(application: Application) : AndroidViewModel(appli
     var repository = MovieRepository(application)
     var allMovies: LiveData<List<MovieFavorite>>
 
-    init{
+    init {
         allMovies = repository.getAllMovies()
     }
 
-    fun insert(movie:MovieFavorite){
+    fun insert(movie: MovieFavorite) {
         repository.insert(movie)
     }
 
-    fun update(movie:MovieFavorite){
+    fun update(movie: MovieFavorite) {
         repository.update(movie)
     }
 
-    fun delete(movie:MovieFavorite){
+    fun delete(movie: MovieFavorite) {
         repository.delete(movie)
     }
 
-    fun deleteAll(movie:MovieFavorite){
+    fun deleteAll(movie: MovieFavorite) {
         repository.deleteAll()
     }
 
-    fun getAllMovie(): LiveData<List<MovieFavorite>>{
+    fun getAllMovie(): LiveData<List<MovieFavorite>> {
         return allMovies
     }
-
-
 
 
 }
