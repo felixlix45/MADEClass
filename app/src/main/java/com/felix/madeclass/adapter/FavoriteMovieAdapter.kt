@@ -45,7 +45,7 @@ class FavoriteMovieAdapter(var context: Context) : RecyclerView.Adapter<Favorite
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         viewHolder.bind(listMovie[i])
 
-        viewHolder.constraintLayout.setOnClickListener { v ->
+        viewHolder.constraintLayout.setOnClickListener { _ ->
             val movie = MovieFavorite()
 
             movie.movieId = listMovie[viewHolder.adapterPosition].movieId

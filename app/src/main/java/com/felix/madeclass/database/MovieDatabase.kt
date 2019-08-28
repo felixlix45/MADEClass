@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.felix.madeclass.dao.MovieDao
 import com.felix.madeclass.model.MovieFavorite
 
-@Database(entities = [MovieFavorite::class], version = 2)
+@Database(entities = [MovieFavorite::class], version = 2, exportSchema = false)
 abstract class MovieDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
