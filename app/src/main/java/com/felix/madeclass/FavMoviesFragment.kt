@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -38,8 +39,19 @@ class FavMoviesFragment : Fragment() {
 
         val fab: FloatingActionButton = v.findViewById(R.id.fabDeleteAllMovie)
         fab.setOnClickListener {
-            favoriteMoviesViewModel.deleteAll()
-            Handler().postDelayed({ loadData() }, 50)
+           AlertDialog.Builder(requireActivity())
+                    .setTitle("Are you sure?")
+                    .setMessage("This will delete all of your favorite movies")
+                    .setPositiveButton("Ok") {dialog, _ ->
+                        favoriteMoviesViewModel.deleteAll()
+                        Handler().postDelayed({ loadData() }, 50)
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("Cancel"){dialog, _ ->
+                        dialog.dismiss()
+                    }
+                   .show()
+
 
         }
 
@@ -55,8 +67,7 @@ class FavMoviesFragment : Fragment() {
                 movieAdapter.setData(favMovies)
                 movieAdapter.notifyDataSetChanged()
                 ivNodata.visibility = View.GONE
-            }
-            else {
+            }else {
                 ivNodata.visibility = View.VISIBLE
             }
         })

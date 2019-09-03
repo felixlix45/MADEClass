@@ -1,5 +1,6 @@
 package com.felix.madeclass
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -36,8 +37,20 @@ class FavTvFragment : Fragment() {
 
         val fab: FloatingActionButton = v.findViewById(R.id.fabDeleteAllTv)
         fab.setOnClickListener {
-            favoriteTvViewModel.deleteAll()
-            Handler().postDelayed({ loadData() }, 50)
+
+            AlertDialog.Builder(requireActivity())
+                    .setTitle("Are you sure?")
+                    .setMessage("This will delete all of your favorite tv show")
+                    .setPositiveButton("Ok"){dialog, _ ->
+                        favoriteTvViewModel.deleteAll()
+                        Handler().postDelayed({ loadData() }, 50)
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("Cancel"){dialog, _->
+                        dialog.dismiss()
+                    }
+                    .show()
+
         }
 
         return v
