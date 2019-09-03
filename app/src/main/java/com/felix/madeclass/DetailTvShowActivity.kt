@@ -159,7 +159,7 @@ class DetailTvShowActivity : AppCompatActivity() {
                     }
 
                     override fun onError(anError: ANError?) {
-                        Toast.makeText(applicationContext, "Error occured, please try again.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Error while trying to get episodes and seasons count.", Toast.LENGTH_SHORT).show()
                     }
                 })
     }

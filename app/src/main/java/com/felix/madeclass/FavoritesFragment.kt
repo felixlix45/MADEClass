@@ -25,10 +25,4 @@ class FavoritesFragment : androidx.fragment.app.Fragment() {
 
         return v
     }
-
-    private fun isNetworkAvailable(): Boolean {
-        val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        return networkInfo != null && networkInfo.isConnected
-    }
 }
