@@ -17,6 +17,7 @@
     <string name="url_movie_trailer">https://api.themoviedb.org/3/movie/%1$s/videos?api_key=%2$s&amp;language=id-IN</string>
     <string name="url_movie_similar">https://api.themoviedb.org/3/movie/%1$s/similar?api_key=%2$s&amp;language=id-IN</string>
     <string name="url_tv">https://api.themoviedb.org/3/discover/tv?api_key=%1$s&amp;language=id-IN&amp;include_adult=true</string>
+    <string name="url_tv_detail">https://api.themoviedb.org/3/tv/%1$s?api_key=%2$s&amp;language=id-IN</string>
     <string name="favorites">Favorite</string>
     <string name="TvPosterText">Poster Tv</string>
     <string name="MoviePosterText">Poster Film</string>
@@ -30,7 +31,12 @@
     <string name="release_date">d MMMM yyyy</string>
     <string name="movie_genres">Genre Film</string>
     <string name="similar_movies">Film Yang Mirip</string>
-    <string name="no_internet_image">Tidak ada foto</string>
     <string name="no_similar_movie">Tidak ada film yang sama</string>
+    <string name="add_to_favorite">Tambah ke Favorite</string>
+    <string name="default_rating">0.0</string>
+    <string name="clapperboard_icon">Icon Clapperboard</string>
+    <string name="tv_seasons_and_episodes">Seasons Tv dan Episodes</string>
+    <string name="sum_tv_seasons_episodes">%1$s Seasons dan %2$s Episodes</string>
+    <string name="no_favorite_data">Tidak Ada Data Favorite</string>
 
 </resources>

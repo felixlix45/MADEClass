@@ -1,11 +1,8 @@
 package com.felix.madeclass
 
-
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -15,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
@@ -22,6 +20,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.felix.madeclass.adapter.MovieAdapter
+import com.felix.madeclass.database.FavoriteDatabase
 import com.felix.madeclass.model.Movie
 import com.felix.madeclass.model.MovieFavorite
 import com.felix.madeclass.viewmodel.FavoriteMoviesViewModel
@@ -70,7 +69,6 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
                 return true
             }
             R.id.menuFavorite -> {
-                Toast.makeText(applicationContext, "Tapped", Toast.LENGTH_LONG).show()
                 saveMovies()
                 return true
             }
@@ -80,6 +78,8 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun saveMovies() {
         val movieFavorite = MovieFavorite()
+
+        val favoriteMoviesViewModel = FavoriteMoviesViewModel(application)
 
         movieFavorite.movieId = movie.movieId
         movieFavorite.photoHigh = movie.photoHigh
@@ -91,9 +91,16 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
         movieFavorite.rating = movie.rating
         movieFavorite.overview = movie.overview
         movieFavorite.adult = movie.adult
-        val favoriteMoviesViewModel = FavoriteMoviesViewModel(application)
-        favoriteMoviesViewModel.insert(movieFavorite)
-        Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT).show()
+        val instance = Room.databaseBuilder(this.baseContext, FavoriteDatabase::class.java, "favorite_database").allowMainThreadQueries().build()
+        if(instance.movieDao().getMovie(movie.movieId!!) != 0){
+            favoriteMoviesViewModel.deleteMovie(movieFavorite.movieId.toString())
+            Toast.makeText(applicationContext, "Deleted from favorite", Toast.LENGTH_SHORT).show()
+        }else{
+            favoriteMoviesViewModel.insert(movieFavorite)
+            Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -199,6 +206,7 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
                 if (movieList.isNotEmpty()) {
                     movieAdapter.setData(movieList)
                 } else {
+
                     txtNoSimilarMovie.visibility = View.VISIBLE
                     rvSimilarMovie.visibility = View.GONE
                 }

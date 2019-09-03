@@ -13,8 +13,9 @@ class Movie() : Parcelable {
     var releaseDate: String? = null
     var rating: String? = null
     var overview: String? = null
-    var adult: Boolean? = null
     var duration: String? = null
+    var adult: Boolean? = null
+
 
     constructor(parcel: Parcel) : this() {
         movieId = parcel.readString()

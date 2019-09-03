@@ -37,7 +37,7 @@ class TvAdapter(private val context: Context) : androidx.recyclerview.widget.Rec
 
         viewHolder.parentLayout.setOnClickListener { v ->
             val tvShow = TvShow()
-
+            tvShow.tvId = listTv[viewHolder.adapterPosition].tvId
             tvShow.title = listTv[viewHolder.adapterPosition].title
             tvShow.overview = listTv[viewHolder.adapterPosition].overview
             tvShow.rating = listTv[viewHolder.adapterPosition].rating

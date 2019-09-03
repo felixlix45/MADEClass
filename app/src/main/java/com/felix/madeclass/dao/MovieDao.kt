@@ -10,16 +10,17 @@ interface MovieDao {
     @Insert
     fun insert(movie: MovieFavorite)
 
-    @Update
-    fun update(movie: MovieFavorite)
-
-    @Delete
-    fun delete(movie: MovieFavorite)
-
     @Query("DELETE FROM movie_table")
     fun deleteAll()
 
+    @Query("DELETE FROM movie_table WHERE movieId = :id")
+    fun deleteMovie(id: String)
+
     @Query("SELECT * FROM movie_table")
     fun getAllMovie(): LiveData<List<MovieFavorite>>
+
+    @Query("SELECT * FROM movie_table WHERE movieId = :id")
+    fun getMovie(id: String): Int
+
 
 }

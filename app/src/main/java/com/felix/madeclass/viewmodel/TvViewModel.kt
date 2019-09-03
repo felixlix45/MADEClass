@@ -29,7 +29,7 @@ class TvViewModel : ViewModel() {
                                 for (i in 0 until movieArr.length()) {
                                     val movieObj = movieArr.getJSONObject(i)
                                     val tv = TvShow()
-
+                                    tv.tvId = movieObj.get("id").toString()
                                     tv.title = movieObj.get("original_name").toString()
                                     tv.overview = movieObj.get("overview").toString()
                                     tv.photoHigh = "https://image.tmdb.org/t/p/original/" + movieObj.get("poster_path").toString()

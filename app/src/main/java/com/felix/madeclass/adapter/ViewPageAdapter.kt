@@ -5,8 +5,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.felix.madeclass.FavMoviesFragment
 import com.felix.madeclass.FavTvFragment
-import com.felix.madeclass.MoviesFragment
-import com.felix.madeclass.TvFragment
 
 class ViewPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {

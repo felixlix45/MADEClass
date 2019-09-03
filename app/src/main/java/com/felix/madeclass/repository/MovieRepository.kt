@@ -4,7 +4,7 @@ import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.felix.madeclass.dao.MovieDao
-import com.felix.madeclass.database.MovieDatabase
+import com.felix.madeclass.database.FavoriteDatabase
 import com.felix.madeclass.model.MovieFavorite
 
 class MovieRepository(application: Application) {
@@ -13,7 +13,7 @@ class MovieRepository(application: Application) {
     private var allMovie: LiveData<List<MovieFavorite>>
 
     init {
-        val database = MovieDatabase.getInstance(application)
+        val database = FavoriteDatabase.getInstance(application)
         movieDao = database!!.movieDao()
         allMovie = movieDao.getAllMovie()
     }
@@ -22,21 +22,18 @@ class MovieRepository(application: Application) {
         InsertMovieAsyncTask(movieDao).execute(movie)
     }
 
-    fun update(movie: MovieFavorite) {
-        UpdateMovieAsyncTask(movieDao).execute(movie)
-    }
-
-    fun delete(movie: MovieFavorite) {
-        DeleteMovieAsyncTask(movieDao).execute(movie)
-    }
-
     fun deleteAll() {
         DeleteAllMovieAsyncTask(movieDao).execute()
+    }
+
+    fun deleteMovie(movieId: String){
+        DeleteMovieIdAsyncTask(movieDao).execute(movieId)
     }
 
     fun getAllMovies(): LiveData<List<MovieFavorite>> {
         return allMovie
     }
+
 
     companion object {
         class InsertMovieAsyncTask(private val movieDao: MovieDao) : AsyncTask<MovieFavorite, Void, String>() {
@@ -47,18 +44,9 @@ class MovieRepository(application: Application) {
             }
         }
 
-        class UpdateMovieAsyncTask(private val movieDao: MovieDao) : AsyncTask<MovieFavorite, Void, String>() {
-
-            override fun doInBackground(vararg params: MovieFavorite): String? {
-                movieDao.update(params[0])
-                return null
-            }
-        }
-
-        class DeleteMovieAsyncTask(private val movieDao: MovieDao) : AsyncTask<MovieFavorite, Void, String>() {
-
-            override fun doInBackground(vararg params: MovieFavorite): String? {
-                movieDao.delete(params[0])
+        class DeleteMovieIdAsyncTask(private val movieDao: MovieDao) :AsyncTask<String, Void, String>(){
+            override fun doInBackground(vararg params: String): String? {
+                movieDao.deleteMovie(params[0])
                 return null
             }
         }
