@@ -3,12 +3,15 @@ package com.felix.madeclass
 
 import android.content.Context
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -36,6 +39,8 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
 
         val swipeRefreshLayout: SwipeRefreshLayout = v.findViewById(R.id.swipeContainer)
         val shimmerFrameLayout: ShimmerFrameLayout = v.findViewById(R.id.shimmer_container)
+        val svMovie: SearchView = v.findViewById(R.id.svMovie)
+
 
         rvMovie = v.findViewById(R.id.rvMovie)
         movieAdapter = MovieAdapter(requireContext())

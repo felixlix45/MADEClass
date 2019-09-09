@@ -38,5 +38,8 @@
     <string name="tv_seasons_and_episodes">Seasons Tv dan Episodes</string>
     <string name="sum_tv_seasons_episodes">%1$s Seasons dan %2$s Episodes</string>
     <string name="no_favorite_data">Tidak Ada Data Favorite</string>
+    <string name="search_movie">Cari Film</string>
+    <string name="search_tv_show">Cari Acara TV</string>
+
 
 </resources>

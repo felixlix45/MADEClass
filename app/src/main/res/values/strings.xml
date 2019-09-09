@@ -7,7 +7,7 @@
     <string name="movie_overview">Movie Overview</string>
     <string name="movie_poster">MoviePoster</string>
     <string name="title_movies">Movies</string>
-    <string name="title_tv_show">Tv Show</string>
+    <string name="title_tv_show">TV Show</string>
     <string name="change_language_settings">Change Language</string>
     <string name="tv_rating">TV Rating</string>
     <string name="tv_release_date">TV Show Release Date</string>
@@ -38,6 +38,8 @@
     <string name="tv_seasons_and_episodes">Tv Seasons and Episodes</string>
     <string name="sum_tv_seasons_episodes">%1$s Seasons and %2$s Episodes</string>
     <string name="no_favorite_data">No Favorite Data</string>
+    <string name="search_movie">Search Movie</string>
+    <string name="search_tv_show">Search TV Show</string>
 
 
 </resources>
