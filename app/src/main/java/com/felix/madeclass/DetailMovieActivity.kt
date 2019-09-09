@@ -228,7 +228,6 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         private const val EXTRA_MOVIE = "extra_movie"
-
     }
 
     private fun getMoreDetail() {

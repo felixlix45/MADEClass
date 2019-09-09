@@ -1,6 +1,7 @@
 package com.felix.madeclass
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import com.facebook.shimmer.ShimmerFrameLayout
 
 import com.felix.madeclass.adapter.TvAdapter
@@ -30,6 +32,22 @@ class TvFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_tv, container, false)
+
+        val svTv : SearchView = v.findViewById(R.id.svTv)
+        svTv.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val intent = Intent(activity, SearchActivity::class.java)
+                intent.putExtra("EXTRA_QUERY", query)
+                startActivity(intent)
+                svTv.clearFocus()
+                svTv.setQuery("", true)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
 
         rvTV = v.findViewById(R.id.rvTV)
         tvAdapter = TvAdapter(requireActivity())

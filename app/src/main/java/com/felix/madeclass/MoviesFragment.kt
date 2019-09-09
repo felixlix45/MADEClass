@@ -2,6 +2,7 @@ package com.felix.madeclass
 
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.net.ConnectivityManager
@@ -10,6 +11,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 
 import androidx.lifecycle.Observer
@@ -40,7 +42,21 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
         val swipeRefreshLayout: SwipeRefreshLayout = v.findViewById(R.id.swipeContainer)
         val shimmerFrameLayout: ShimmerFrameLayout = v.findViewById(R.id.shimmer_container)
         val svMovie: SearchView = v.findViewById(R.id.svMovie)
+        svMovie.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
 
+                val intent = Intent(activity, SearchActivity::class.java)
+                intent.putExtra("EXTRA_QUERY", query)
+                startActivity(intent)
+                svMovie.clearFocus()
+                svMovie.setQuery("", true)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
 
         rvMovie = v.findViewById(R.id.rvMovie)
         movieAdapter = MovieAdapter(requireContext())
