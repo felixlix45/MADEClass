@@ -27,17 +27,21 @@ class TvViewModel : ViewModel() {
                             if (response != null) {
                                 val movieArr = response.getJSONArray("results")
                                 for (i in 0 until movieArr.length()) {
-                                    val movieObj = movieArr.getJSONObject(i)
+                                    val tvObj = movieArr.getJSONObject(i)
                                     val tv = TvShow()
-                                    tv.tvId = movieObj.get("id").toString()
-                                    tv.title = movieObj.get("original_name").toString()
-                                    tv.overview = movieObj.get("overview").toString()
-                                    tv.photoHigh = "https://image.tmdb.org/t/p/original/" + movieObj.get("poster_path").toString()
-                                    tv.photoLow = "https://image.tmdb.org/t/p/w154/" + movieObj.get("poster_path").toString()
-                                    tv.rating = movieObj.get("vote_average").toString()
-                                    tv.releaseDate = movieObj.get("first_air_date").toString()
-                                    tv.photoBackdropLow = "https://image.tmdb.org/t/p/w154/" + movieObj.get("backdrop_path").toString()
-                                    tv.photoBackdropHigh = "https://image.tmdb.org/t/p/original/" + movieObj.get("backdrop_path").toString()
+                                    tv.tvId = tvObj.get("id").toString()
+                                    tv.title = tvObj.get("original_name").toString()
+                                    tv.overview = tvObj.get("overview").toString()
+                                    tv.photoHigh = "https://image.tmdb.org/t/p/original/" + tvObj.get("poster_path").toString()
+                                    tv.photoLow = "https://image.tmdb.org/t/p/w154/" + tvObj.get("poster_path").toString()
+                                    tv.rating = tvObj.get("vote_average").toString()
+                                    if(tvObj.isNull("first_air_date")){
+                                        tv.releaseDate = ""
+                                    }else{
+                                        tv.releaseDate = tvObj.get("first_air_date").toString()
+                                    }
+                                    tv.photoBackdropLow = "https://image.tmdb.org/t/p/w154/" + tvObj.get("backdrop_path").toString()
+                                    tv.photoBackdropHigh = "https://image.tmdb.org/t/p/original/" + tvObj.get("backdrop_path").toString()
 
                                     listItem.add(tv)
                                 }

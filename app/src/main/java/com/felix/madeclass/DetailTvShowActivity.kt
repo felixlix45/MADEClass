@@ -1,6 +1,8 @@
 package com.felix.madeclass
 
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -99,8 +101,17 @@ class DetailTvShowActivity : AppCompatActivity() {
                 getMoreDetail(tvID)
             }
             txtTitle.text = title
-            txtOverview.text = overview
-            txtReleaseDate.text = releaseDate
+            if (overview == ""){
+                txtOverview.text = getString(R.string.no_overview)
+            }else{
+                txtOverview.text = overview
+            }
+            if(releaseDate != resources.getString(R.string.no_release_date)){
+                txtReleaseDate.text = releaseDate
+            }else{
+                txtReleaseDate.text = resources.getString(R.string.no_release_date)
+            }
+
             txtRating.text = rating
             if(rating != null){
                 if(rating.toFloat() >= 7){

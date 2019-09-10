@@ -18,6 +18,8 @@
     <string name="url_movie_similar">https://api.themoviedb.org/3/movie/%1$s/similar?api_key=%2$s&amp;language=id-IN</string>
     <string name="url_tv">https://api.themoviedb.org/3/discover/tv?api_key=%1$s&amp;language=id-IN&amp;include_adult=true</string>
     <string name="url_tv_detail">https://api.themoviedb.org/3/tv/%1$s?api_key=%2$s&amp;language=id-IN</string>
+    <string name="url_search_movie">https://api.themoviedb.org/3/search/movie?api_key=%1$s&amp;language=id-IN&amp;query=%2$s</string>
+    <string name="url_search_tv">https://api.themoviedb.org/3/search/tv?api_key=%1$s&amp;language=id-IN&amp;query=%2$s</string>
     <string name="favorites">Favorite</string>
     <string name="TvPosterText">Poster Tv</string>
     <string name="MoviePosterText">Poster Film</string>
@@ -40,6 +42,8 @@
     <string name="no_favorite_data">Tidak Ada Data Favorite</string>
     <string name="search_movie">Cari Film</string>
     <string name="search_tv_show">Cari Acara TV</string>
+    <string name="no_release_date">Tidak ada info tanggal rilis</string>
+    <string name="no_overview">Tidak ada sinopsis</string>
 
 
 </resources>

@@ -70,14 +70,23 @@ class TvAdapter(private val context: Context) : androidx.recyclerview.widget.Rec
             txtTitle.text = tvShow.title
             val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             val dateFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
-            val date: Date = formatter.parse(tvShow.releaseDate)
-            val releaseDate = dateFormat.format(date).toString()
-            txtReleaseDate.text = releaseDate
+            if(tvShow.releaseDate != ""){
+                val date: Date = formatter.parse(tvShow.releaseDate)
+                val releaseDate = dateFormat.format(date).toString()
+                txtReleaseDate.text = releaseDate
+            }else{
+                txtReleaseDate.text = context.getString(R.string.no_release_date)
+            }
+            
+
             txtRating.text = tvShow.rating
 
             Glide.with(context)
                     .load(tvShow.photoHigh)
-                    .fallback(R.drawable.no_image_available)
+                    .error(
+                            Glide.with(context)
+                                    .load(R.drawable.no_image_available)
+                    )
                     .thumbnail(
                             Glide.with(context)
                                     .load(tvShow.photoLow)

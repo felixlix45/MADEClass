@@ -47,6 +47,7 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
 
                 val intent = Intent(activity, SearchActivity::class.java)
                 intent.putExtra("EXTRA_QUERY", query)
+                intent.putExtra("EXTRA_ACTIVITY", "Movies")
                 startActivity(intent)
                 svMovie.clearFocus()
                 svMovie.setQuery("", true)

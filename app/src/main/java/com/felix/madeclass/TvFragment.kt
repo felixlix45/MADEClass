@@ -38,6 +38,7 @@ class TvFragment : androidx.fragment.app.Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val intent = Intent(activity, SearchActivity::class.java)
                 intent.putExtra("EXTRA_QUERY", query)
+                intent.putExtra("EXTRA_ACTIVITY", "TV")
                 startActivity(intent)
                 svTv.clearFocus()
                 svTv.setQuery("", true)

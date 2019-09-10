@@ -18,6 +18,8 @@
     <string name="url_movie_similar">https://api.themoviedb.org/3/movie/%1$s/similar?api_key=%2$s&amp;language=en-US</string>
     <string name="url_tv">https://api.themoviedb.org/3/discover/tv?api_key=%1$s&amp;language=en-US&amp;include_adult=true</string>
     <string name="url_tv_detail">https://api.themoviedb.org/3/tv/%1$s?api_key=%2$s&amp;language=en-US</string>
+    <string name="url_search_movie">https://api.themoviedb.org/3/search/movie?api_key=%1$s&amp;language=en-US&amp;query=%2$s</string>
+    <string name="url_search_tv">https://api.themoviedb.org/3/search/tv?api_key=%1$s&amp;language=en-US&amp;query=%2$s</string>
     <string name="favorites">Favorites</string>
     <string name="TvPosterText">TvPoster</string>
     <string name="MoviePosterText">Movie Poster</string>
@@ -40,6 +42,8 @@
     <string name="no_favorite_data">No Favorite Data</string>
     <string name="search_movie">Search Movie</string>
     <string name="search_tv_show">Search TV Show</string>
+    <string name="no_release_date">No Release Date Info</string>
+    <string name="no_overview">No Overview</string>
 
 
 </resources>

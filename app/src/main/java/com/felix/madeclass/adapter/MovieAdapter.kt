@@ -2,6 +2,7 @@ package com.felix.madeclass.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,12 +88,20 @@ class MovieAdapter(var context: Context) : RecyclerView.Adapter<MovieAdapter.Vie
             txtRating.text = movie.rating
             val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             val dateFormat = SimpleDateFormat(context.resources.getString(R.string.release_date), Locale.getDefault())
-            val date: Date = formatter.parse(movie.releaseDate)
-            val releaseDate = dateFormat.format(date).toString()
-            txtReleaseDate.text = releaseDate
+            if(movie.releaseDate != ""){
+                val date: Date = formatter.parse(movie.releaseDate)
+                val releaseDate = dateFormat.format(date).toString()
+                txtReleaseDate.text = releaseDate
+            }else{
+                txtReleaseDate.text = context.getString(R.string.no_release_date)
+            }
+
             Glide.with(context)
                     .load(movie.photoHigh)
-                    .fallback(R.drawable.no_image_available)
+                    .error(
+                            Glide.with(context)
+                                    .load(R.drawable.no_image_available)
+                    )
                     .thumbnail(
                             Glide.with(context)
                                     .load(movie.photoLow)

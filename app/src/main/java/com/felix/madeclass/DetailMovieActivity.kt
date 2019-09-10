@@ -185,7 +185,11 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
             txtTitle.text = title
             txtOverview.text = overview
             txtRating.text = rating
-            txtReleaseDate.text = releaseDate
+            if(releaseDate != ""){
+                txtReleaseDate.text = releaseDate
+            }else{
+                resources.getString(R.string.no_release_date)
+            }
 
 
 
