@@ -50,7 +50,6 @@ class FavTvFragment : Fragment() {
                         dialog.dismiss()
                     }
                     .show()
-
         }
 
         return v
