@@ -44,7 +44,7 @@ class FavMoviesFragment : Fragment() {
                     .setMessage("This will delete all of your favorite movies")
                     .setPositiveButton("Ok") {dialog, _ ->
                         favoriteMoviesViewModel.deleteAll()
-                        Handler().postDelayed({ loadData() }, 50)
+                        Handler().postDelayed({ loadData() }, 100)
                         dialog.dismiss()
                     }
                     .setNegativeButton("Cancel"){dialog, _ ->

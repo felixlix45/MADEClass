@@ -43,7 +43,7 @@ class FavTvFragment : Fragment() {
                     .setMessage("This will delete all of your favorite tv show")
                     .setPositiveButton("Ok"){dialog, _ ->
                         favoriteTvViewModel.deleteAll()
-                        Handler().postDelayed({ loadData() }, 50)
+                        Handler().postDelayed({ loadData() }, 100)
                         dialog.dismiss()
                     }
                     .setNegativeButton("Cancel"){dialog, _->

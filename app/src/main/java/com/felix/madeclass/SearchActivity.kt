@@ -64,7 +64,14 @@ class SearchActivity : AppCompatActivity() {
         svSearch.setQuery(query, false)
         svSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Toast.makeText(applicationContext, query.toString(), Toast.LENGTH_SHORT).show()
+                if(query!= null){
+                    shimmerContainer.visibility = View.VISIBLE
+                    shimmerContainer.startShimmer()
+                    loadData(query)
+                    buildRecyclerView()
+                    svSearch.clearFocus()
+                    shimmerContainer.stopShimmer()
+                }
                 return false
             }
 
@@ -74,7 +81,7 @@ class SearchActivity : AppCompatActivity() {
         })
 
         if(activities == "Movies"){
-            url = resources.getString(R.string.url_search_movie, BuildConfig.API_KEY, query)
+
             movieAdapter = MovieAdapter(this)
             searchViewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
             searchViewModel.getSearchMovie().observe(this, Observer<ArrayList<Movie>>{list ->
@@ -83,13 +90,14 @@ class SearchActivity : AppCompatActivity() {
                     shimmerContainer.stopShimmer()
                     shimmerContainer.visibility = View.GONE
                 }else{
-                    Toast.makeText(this, "Err.. something went wrong", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "No Data Available", Toast.LENGTH_SHORT).show()
+                    shimmerContainer.visibility = View.GONE
                 }
             })
-            loadDataMovie()
+            loadData(query)
             buildRecyclerView()
         }else{
-            url = resources.getString(R.string.url_search_tv, BuildConfig.API_KEY, query)
+
             tvAdapter = TvAdapter(this)
             searchViewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
             searchViewModel.getSearchTV().observe(this, Observer<ArrayList<TvShow>>{list ->
@@ -98,21 +106,24 @@ class SearchActivity : AppCompatActivity() {
                     shimmerContainer.stopShimmer()
                     shimmerContainer.visibility = View.GONE
                 }else{
-                    Toast.makeText(this, "Err.. something went wrong", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "No Data Available", Toast.LENGTH_SHORT).show()
+                    shimmerContainer.visibility = View.GONE
                 }
             })
-            loadDataMovie()
+            loadData(query)
             buildRecyclerView()
         }
     }
 
-    private fun loadDataMovie(){
+    private fun loadData(query: String){
         if(activities == "Movies"){
+            url = resources.getString(R.string.url_search_movie, BuildConfig.API_KEY, query)
             searchViewModel.setMovie(url)
             movieAdapter = MovieAdapter(this)
             movieAdapter.notifyDataSetChanged()
         }else{
             searchViewModel.setTv(url)
+            url = resources.getString(R.string.url_search_tv, BuildConfig.API_KEY, query)
             tvAdapter = TvAdapter(this)
             tvAdapter.notifyDataSetChanged()
         }
