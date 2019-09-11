@@ -122,8 +122,8 @@ class SearchActivity : AppCompatActivity() {
             movieAdapter = MovieAdapter(this)
             movieAdapter.notifyDataSetChanged()
         }else{
-            searchViewModel.setTv(url)
             url = resources.getString(R.string.url_search_tv, BuildConfig.API_KEY, query)
+            searchViewModel.setTv(url)
             tvAdapter = TvAdapter(this)
             tvAdapter.notifyDataSetChanged()
         }

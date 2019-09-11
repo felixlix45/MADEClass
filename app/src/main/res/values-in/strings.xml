@@ -8,7 +8,7 @@
     <string name="movie_poster">Poster FIlm</string>
     <string name="title_movies">Film</string>
     <string name="title_tv_show">Acara TV</string>
-    <string name="change_language_settings">Ganti Bahasa</string>
+
     <string name="tv_rating">Rating TV</string>
     <string name="tv_release_date">Tanggal Rilis</string>
     <string name="heart_icon">Ikon Hati</string>
@@ -44,6 +44,21 @@
     <string name="search_tv_show">Cari Acara TV</string>
     <string name="no_release_date">Tidak ada info tanggal rilis</string>
     <string name="no_overview">Tidak ada sinopsis</string>
+
+    <string name="settings">Pengaturan</string>
+    <string name="title_activity_settings">Pengaturan</string>
+
+    <!-- Preference Titles -->
+    <string name="languages">Bahasa</string>
+    <string name="notification">Notifikasi</string>
+
+    <!-- Language Preferences -->
+    <string name="change_language_settings">Ganti Bahasa</string>
+
+    <!-- Notification Preferences -->
+    <string name="daily_notification_7AM">Menerima notifikasi setiap jam 7 pagi</string>
+    <string name="daily_notification_8AM">Menerima notifikasi mengenai film baru setiap jam 8 pagi</string>
+
 
 
 </resources>

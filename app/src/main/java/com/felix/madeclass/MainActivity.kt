@@ -62,9 +62,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.change_language) {
+        if (item.itemId == R.id.settings) {
             val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-            startActivity(intent)
+            val intentSetting = Intent(applicationContext, SettingsActivity::class.java)
+            startActivity(intentSetting)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -73,8 +74,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val alarmReceiver = AlarmReceiver()
-        alarmReceiver.setRepeatingAlarm(this)
-//        alarmReceiver.cancelAlarm(this)
+
         Realm.init(this)
 
         coordinatorLayout = findViewById(R.id.coordinatorLayout)
