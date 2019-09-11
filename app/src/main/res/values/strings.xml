@@ -20,6 +20,7 @@
     <string name="url_tv_detail">https://api.themoviedb.org/3/tv/%1$s?api_key=%2$s&amp;language=en-US</string>
     <string name="url_search_movie">https://api.themoviedb.org/3/search/movie?api_key=%1$s&amp;language=en-US&amp;query=%2$s</string>
     <string name="url_search_tv">https://api.themoviedb.org/3/search/tv?api_key=%1$s&amp;language=en-US&amp;query=%2$s</string>
+    <string name="url_today_movie">https://api.themoviedb.org/3/discover/movie?api_key=%1$s&amp;primary_release_date.gte=%2$s&amp;primary_release_date.lte=%3$s&amp;language=en-US</string>
     <string name="favorites">Favorites</string>
     <string name="TvPosterText">TvPoster</string>
     <string name="MoviePosterText">Movie Poster</string>

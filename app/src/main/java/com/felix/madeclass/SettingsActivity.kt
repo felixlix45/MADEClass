@@ -67,9 +67,9 @@ class SettingsActivity : AppCompatActivity() {
             notifNewMovie?.isChecked = false
             notifNewMovie?.setOnPreferenceChangeListener { preference, isChecked ->
                 if(isChecked == true){
-                    Toast.makeText(requireActivity(), "True", Toast.LENGTH_SHORT).show()
+                    alarmReceiver.setMovieAlarm(requireActivity())
                 }else{
-                    Toast.makeText(requireActivity(), "False", Toast.LENGTH_SHORT).show()
+                    alarmReceiver.cancelMovieAlarm(requireActivity())
                 }
                 true
             }
