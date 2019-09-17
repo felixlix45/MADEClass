@@ -8,7 +8,9 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.androidnetworking.interfaces.OkHttpResponseAndJSONObjectRequestListener
 import com.felix.madeclass.model.Movie
+import okhttp3.Response
 import org.json.JSONObject
 
 
@@ -21,8 +23,8 @@ class MoviesViewModel : ViewModel() {
             AndroidNetworking.get(url)
                     .setPriority(Priority.MEDIUM)
                     .build()
-                    .getAsJSONObject(object : JSONObjectRequestListener {
-                        override fun onResponse(response: JSONObject?) {
+                    .getAsOkHttpResponseAndJSONObject(object : OkHttpResponseAndJSONObjectRequestListener {
+                        override fun onResponse(okHttpResponse: Response?, response: JSONObject?) {
                             if (response != null) {
                                 val movieArr = response.getJSONArray("results")
                                 for (i in 0 until movieArr.length()) {
@@ -52,13 +54,13 @@ class MoviesViewModel : ViewModel() {
                             } else {
                                 listMovie.postValue(null)
                             }
-
                         }
 
                         override fun onError(anError: ANError?) {
 
                         }
                     })
+
         } catch (e: Exception) {
             Log.d("Exception", e.message.toString())
         }

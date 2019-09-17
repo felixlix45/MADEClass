@@ -108,7 +108,6 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
             movieAdapter = MovieAdapter(requireContext())
             movieAdapter.notifyDataSetChanged()
         }
-
     }
 
     private fun buildRecycleView() {
@@ -127,4 +126,5 @@ class MoviesFragment : androidx.fragment.app.Fragment() {
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
     }
+
 }

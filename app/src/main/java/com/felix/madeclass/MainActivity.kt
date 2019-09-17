@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
 
         val fragment: Fragment
         fragment = MoviesFragment()
+
         supportFragmentManager.commit { replace(R.id.fragment_container, fragment, fragment.javaClass.simpleName) }
         supportActionBar?.title = "Movies"
     }
