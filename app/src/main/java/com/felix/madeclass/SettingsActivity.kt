@@ -43,6 +43,7 @@ class SettingsActivity : AppCompatActivity() {
 
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
             val alarmReceiver = AlarmReceiver()
             val changeLanguage: Preference? = findPreference("language")
@@ -53,7 +54,7 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             val notifEveryDay: SwitchPreferenceCompat? = findPreference("notification7am")
-            notifEveryDay?.isChecked = false
+
             notifEveryDay?.setOnPreferenceChangeListener { preference, isChecked ->
                 if(isChecked == true){
                     alarmReceiver.setRepeatingAlarm(requireActivity(), "Aku kangen kamu :(", "Balik yuk ke aplikasi aku :)")
@@ -64,7 +65,7 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             val notifNewMovie: SwitchPreferenceCompat? = findPreference("notification8am")
-            notifNewMovie?.isChecked = false
+
             notifNewMovie?.setOnPreferenceChangeListener { preference, isChecked ->
                 if(isChecked == true){
                     alarmReceiver.setMovieAlarm(requireActivity())

@@ -38,8 +38,8 @@ class AlarmReceiver: BroadcastReceiver() {
 
     private fun showAlarmNotification(context: Context, title: String, message:String, code: String){
 
-        var newTitle : String? = null
-        var newMessage: String? = null
+        var newTitle: String?
+        var newMessage: String?
 
         val notificationManagerCompat = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
@@ -63,7 +63,7 @@ class AlarmReceiver: BroadcastReceiver() {
 
                                 builder = NotificationCompat.Builder(context, "1")
                                         .setSmallIcon(R.drawable.ic_alarm_black_24dp)
-                                        .setContentTitle(newTitle)
+                                        .setContentTitle("New Movie : $newTitle")
                                         .setContentText(newMessage)
                                         .setColor(ContextCompat.getColor(context, android.R.color.transparent))
                                         .setVibrate(longArrayOf(1000,1000,1000,1000,1000))
@@ -122,6 +122,19 @@ class AlarmReceiver: BroadcastReceiver() {
 
     fun cancelAlarm(context: Context){
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        intent.putExtra(extra_title, "")
+        intent.putExtra(extra_message, "")
+        intent.putExtra(extra_code, "repeating")
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 7)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
         alarmManager.cancel(pendingIntent)
         Toast.makeText(context, "Alarm Cancelled", Toast.LENGTH_SHORT).show()
     }
@@ -150,6 +163,22 @@ class AlarmReceiver: BroadcastReceiver() {
 
     fun cancelMovieAlarm(context: Context){
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(context, AlarmReceiver::class.java)
+
+        intent.putExtra(extra_title, "")
+        intent.putExtra(extra_message, "")
+        intent.putExtra(extra_code, "movie")
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 8)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        pendingIntentMovie = PendingIntent.getBroadcast(context, 1, intent, 0)
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntentMovie)
+
         alarmManager.cancel(pendingIntentMovie)
         Toast.makeText(context, "Alarm Cancelled", Toast.LENGTH_SHORT).show()
     }

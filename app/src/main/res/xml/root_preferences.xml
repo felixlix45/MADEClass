@@ -14,7 +14,8 @@
   ~ limitations under the License.
   -->
 
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory app:title="@string/languages">
 
@@ -30,12 +31,14 @@
         <SwitchPreferenceCompat
             app:key="notification7am"
             app:title="Receive Notification Every Day"
-            app:summaryOn="@string/daily_notification_7AM" />
+            app:summaryOn="@string/daily_notification_7AM"
+            app:defaultValue="false" />
 
         <SwitchPreferenceCompat
             app:key="notification8am"
             app:summaryOn="@string/daily_notification_8AM"
-            app:title="Receive Notification Every New Movie" />
+            app:title="Receive Notification Every New Movie"
+            app:defaultValue="true" />
 
     </PreferenceCategory>
 

@@ -18,7 +18,9 @@ class FavoriteWidget : AppWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         // There may be multiple widgets active, so update all of them
+
         for (appWidgetId in appWidgetIds) {
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.stack_view)
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
     }
