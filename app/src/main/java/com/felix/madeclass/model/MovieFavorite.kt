@@ -18,4 +18,8 @@ class MovieFavorite {
     var rating: String? = null
     var overview: String? = null
     var adult: Boolean? = null
+
+    companion object {
+        const val TABLE_NAME = "movie_table"
+    }
 }

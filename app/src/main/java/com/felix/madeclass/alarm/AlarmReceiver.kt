@@ -120,26 +120,7 @@ class AlarmReceiver: BroadcastReceiver() {
 
     }
 
-    fun cancelAlarm(context: Context){
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, AlarmReceiver::class.java)
-        intent.putExtra(extra_title, "")
-        intent.putExtra(extra_message, "")
-        intent.putExtra(extra_code, "repeating")
-
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 7)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
-        calendar.set(Calendar.MILLISECOND, 0)
-
-        pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
-        alarmManager.cancel(pendingIntent)
-        Toast.makeText(context, "Alarm Cancelled", Toast.LENGTH_SHORT).show()
-    }
-
-    fun setRepeatingAlarm(context: Context, title: String, message: String){
+    fun setRepeatingAlarm(context: Context, title: String, message: String) {
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -161,7 +142,46 @@ class AlarmReceiver: BroadcastReceiver() {
 
     }
 
-    fun cancelMovieAlarm(context: Context){
+    fun cancelAlarm(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        intent.putExtra(extra_title, "")
+        intent.putExtra(extra_message, "")
+        intent.putExtra(extra_code, "repeating")
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 7)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+        alarmManager.cancel(pendingIntent)
+        Toast.makeText(context, "Alarm Cancelled", Toast.LENGTH_SHORT).show()
+    }
+
+    fun setMovieAlarm(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+
+        intent.putExtra(extra_title, "")
+        intent.putExtra(extra_message, "")
+        intent.putExtra(extra_code, "movie")
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 8)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        pendingIntentMovie = PendingIntent.getBroadcast(context, 1, intent, 0)
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntentMovie)
+
+        Toast.makeText(context, "Movie Alarm Set Up", Toast.LENGTH_SHORT).show()
+    }
+
+    fun cancelMovieAlarm(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val intent = Intent(context, AlarmReceiver::class.java)
@@ -183,25 +203,6 @@ class AlarmReceiver: BroadcastReceiver() {
         Toast.makeText(context, "Alarm Cancelled", Toast.LENGTH_SHORT).show()
     }
 
-    fun setMovieAlarm(context: Context){
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, AlarmReceiver::class.java)
-
-        intent.putExtra(extra_title, "")
-        intent.putExtra(extra_message, "")
-        intent.putExtra(extra_code, "movie")
-
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 8)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
-        calendar.set(Calendar.MILLISECOND, 0)
-
-        pendingIntentMovie = PendingIntent.getBroadcast(context, 1, intent, 0)
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntentMovie)
-
-        Toast.makeText(context, "Movie Alarm Set Up", Toast.LENGTH_SHORT).show()
-    }
 
     companion object{
         const val extra_title = "EXTRA_TITLE"
