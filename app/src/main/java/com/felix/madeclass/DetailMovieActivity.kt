@@ -249,10 +249,10 @@ class DetailMovieActivity : AppCompatActivity(), View.OnClickListener {
                         val genres = response.getJSONArray("genres")
 
                         for (j in 0 until genres.length()) {
-                            if (j == genres.length() - 1) {
-                                genre += genres.getJSONObject(j).get("name").toString()
+                            genre += if (j == genres.length() - 1) {
+                                genres.getJSONObject(j).get("name").toString()
                             } else {
-                                genre += genres.getJSONObject(j).get("name").toString() + " | "
+                                genres.getJSONObject(j).get("name").toString() + " | "
                             }
                         }
                         txtGenres.text = genre

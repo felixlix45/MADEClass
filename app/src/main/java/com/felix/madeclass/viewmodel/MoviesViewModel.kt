@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
-import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.androidnetworking.interfaces.OkHttpResponseAndJSONObjectRequestListener
 import com.felix.madeclass.model.Movie
 import okhttp3.Response

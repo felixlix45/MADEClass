@@ -6,15 +6,9 @@ import android.content.Context
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
-import androidx.room.RoomMasterTable.TABLE_NAME
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.util.Log
 import com.felix.madeclass.dao.MovieDao
 import com.felix.madeclass.database.FavoriteDatabase
 import com.felix.madeclass.model.MovieFavorite
-import org.jetbrains.annotations.Contract
-import java.lang.IllegalArgumentException
-import java.util.regex.Matcher
 
 
 class AppContentProvider : ContentProvider() {

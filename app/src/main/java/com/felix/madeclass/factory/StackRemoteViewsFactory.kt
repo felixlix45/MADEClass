@@ -2,13 +2,12 @@ package com.felix.madeclass.factory
 
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
-import android.widget.RemoteViews
-import android.widget.RemoteViewsService
 import android.graphics.Bitmap
 import android.os.Binder
 import android.os.Bundle
 import android.util.Log
+import android.widget.RemoteViews
+import android.widget.RemoteViewsService
 import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -23,7 +22,6 @@ class StackRemoteViewsFactory(context: Context) : RemoteViewsService.RemoteViews
 
     private val mWidgetItems = ArrayList<Bitmap>()
     private var mContext: Context = context
-    private lateinit var cursor: Cursor
     private lateinit var newItem: List<MovieFavorite>
     private lateinit var instance: FavoriteDatabase
 
